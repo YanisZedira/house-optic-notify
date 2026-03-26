@@ -723,7 +723,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       var resp = await fetch(WH_ATTENTE);
       var data = await resp.json();
       var rows = Array.isArray(data) ? data : (data.items || []);
-      var enAttente = rows.filter(function(r) { return r.statut === 'EN ATTENTE'; });
+      var enAttente = rows.filter(function(r) { return (r['STATUT'] || r.statut || '') === 'EN ATTENTE'; });
       renderAttente(enAttente);
     } catch(e) {
       card.innerHTML = '<div class="loading-state" style="color:#c0392b;">Impossible de charger. Vérifiez que le workflow sheets-attente est actif.</div>';
@@ -746,23 +746,23 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       return;
     }
 
-    rows.sort(function(a,b) { return daysSince(b.date_scan) - daysSince(a.date_scan); });
+    rows.sort(function(a,b) { return daysSince(b['DATE SCAN']||b.date_scan) - daysSince(a['DATE SCAN']||a.date_scan); });
     updateAttenteCountDirect(rows.length);
 
     var html = '<div class="attente-list">';
     rows.forEach(function(row) {
-      var days = daysSince(row.date_scan);
+      var days = daysSince(row['DATE SCAN'] || row.date_scan);
       var dayClass = days <= 5 ? 'days-ok' : days <= 13 ? 'days-warn' : 'days-late';
       var dayLabel = days === 0 ? "Aujourd'hui" : days === 1 ? '1 jour' : days + ' jours';
       var isLate = days >= 14;
       html += '<div class="att-item">' +
-        '<div class="att-av">' + (row.nom || 'C').charAt(0).toUpperCase() + '</div>' +
+        '<div class="att-av">' + (row['NOM CLIENT'] || row.nom || 'C').charAt(0).toUpperCase() + '</div>' +
         '<div class="att-info">' +
-          '<div class="att-name">' + (row.nom || '—') + (isLate ? ' ⚠️' : '') + '</div>' +
-          '<div class="att-meta">' + (row.telephone || '—') + ' · Scanné le ' + (row.date_scan || '—') + '</div>' +
+          '<div class="att-name">' + (row['NOM CLIENT'] || row.nom || '—') + (isLate ? ' ⚠️' : '') + '</div>' +
+          '<div class="att-meta">' + (row['TELEPHONE'] || row.telephone || '—') + ' · Scanné le ' + (row['DATE SCAN'] || row.date_scan || '—') + '</div>' +
         '</div>' +
         '<span class="att-days ' + dayClass + '">' + dayLabel + '</span>' +
-        '<button class="btn-recup" data-name="' + (row.nom||'') + '" data-phone="' + (row.telephone||'') + '" data-row="' + (row._rowNumber||'') + '">' +
+        '<button class="btn-recup" data-name="' + (row['NOM CLIENT']||row.nom||'') + '" data-phone="' + (row['TELEPHONE']||row.telephone||'') + '" data-row="' + (row.row_number||row._rowNumber||'') + '">' +
           '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Récupéré' +
         '</button>' +
       '</div>';
@@ -800,7 +800,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       var resp = await fetch(WH_ATTENTE);
       var data = await resp.json();
       var rows = Array.isArray(data) ? data : (data.items || []);
-      var count = rows.filter(function(r) { return r.statut === 'EN ATTENTE'; }).length;
+      var count = rows.filter(function(r) { return (r['STATUT'] || r.statut || '') === 'EN ATTENTE'; }).length;
       updateAttenteCountDirect(count);
     } catch(e) {}
   }
