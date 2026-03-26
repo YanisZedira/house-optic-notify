@@ -6,187 +6,188 @@
 <title>House Optic — Espace Équipe</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --ink:#0d0d0d; --paper:#f7f4ef; --gold:#c9a84c; --gold-light:#e8d5a3;
-    --gold-dim:rgba(201,168,76,0.15); --muted:#8a8070; --surface:#fff;
-    --shadow:0 8px 40px rgba(13,13,13,0.08); --shadow-sm:0 2px 12px rgba(13,13,13,0.06);
-    --radius:16px; --radius-sm:10px; --green:#1a6b3c; --green-bg:#f0faf5;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'DM Sans',sans-serif;background:var(--paper);min-height:100vh;overflow-x:hidden;}
-  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
+:root {
+  --ink:#0d0d0d; --paper:#f7f4ef; --gold:#c9a84c; --gold-light:#e8d5a3;
+  --gold-dim:rgba(201,168,76,0.15); --muted:#8a8070; --surface:#fff;
+  --shadow:0 8px 40px rgba(13,13,13,0.08); --shadow-sm:0 2px 12px rgba(13,13,13,0.06);
+  --radius:16px; --radius-sm:10px; --green:#1a6b3c; --green-bg:#f0faf5;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
-  /* PIN */
-  #pin-screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100;background:var(--paper);}
-  .pin-wrapper{width:100%;max-width:400px;display:flex;flex-direction:column;gap:28px;animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;}
-  .pin-header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;}
-  .logo-mark{width:60px;height:60px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
-  .logo-mark::before{content:'';position:absolute;inset:5px;border:1px solid var(--gold-light);border-radius:50%;opacity:0.5;}
-  .logo-mark svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.5;}
-  .brand-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ink);letter-spacing:0.12em;text-transform:uppercase;}
-  .brand-sub{font-size:11px;font-weight:300;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;margin-top:2px;}
-  .divider{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-  .pin-card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid rgba(13,13,13,0.06);display:flex;flex-direction:column;gap:20px;}
-  .pin-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);}
-  .pin-card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-top:-12px;}
-  .pin-dots{display:flex;justify-content:center;gap:14px;margin:4px 0;}
-  .pin-dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(13,13,13,0.15);transition:all 0.2s ease;}
-  .pin-dot.filled{background:var(--ink);border-color:var(--ink);transform:scale(1.1);}
-  .pin-dot.error{background:#c0392b;border-color:#c0392b;animation:shake 0.4s ease;}
-  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
-  .pin-error{text-align:center;font-size:13px;color:#c0392b;height:16px;}
-  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
-  .key{aspect-ratio:1;border:1.5px solid rgba(13,13,13,0.08);border-radius:11px;background:var(--paper);font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);cursor:pointer;transition:all 0.15s ease;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;}
-  .key:hover{background:#fff;border-color:var(--gold);}
-  .key:active{transform:scale(0.93);background:var(--gold-dim);}
-  .key.key-empty{background:transparent;border-color:transparent;cursor:default;}
+/* ── PIN ── */
+#pin-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;z-index:100;background:var(--paper);}
+.pin-wrapper{width:100%;max-width:400px;display:flex;flex-direction:column;gap:28px;}
+.pin-header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.logo-mark{width:60px;height:60px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+.logo-mark::before{content:'';position:absolute;inset:5px;border:1px solid var(--gold-light);border-radius:50%;opacity:.5;}
+.logo-mark svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.brand-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ink);letter-spacing:.12em;text-transform:uppercase;}
+.brand-sub{font-size:11px;color:var(--muted);letter-spacing:.25em;text-transform:uppercase;}
+.divider{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.pin-card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid rgba(13,13,13,.06);display:flex;flex-direction:column;gap:20px;}
+.pin-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);}
+.pin-card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-top:-12px;}
+.pin-dots{display:flex;justify-content:center;gap:14px;}
+.pin-dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(13,13,13,.15);transition:all .2s;}
+.pin-dot.filled{background:var(--ink);border-color:var(--ink);transform:scale(1.1);}
+.pin-dot.error{background:#c0392b;border-color:#c0392b;}
+.pin-error{text-align:center;font-size:13px;color:#c0392b;height:16px;}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+.key{aspect-ratio:1;border:1.5px solid rgba(13,13,13,.08);border-radius:11px;background:var(--paper);font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;user-select:none;}
+.key:hover{background:#fff;border-color:var(--gold);}
+.key:active{transform:scale(.93);background:var(--gold-dim);}
+.key-empty{background:transparent!important;border-color:transparent!important;cursor:default!important;}
 
-  /* APP */
-  #app-screen{display:none;min-height:100vh;}
-  .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--ink);display:flex;flex-direction:column;z-index:50;box-shadow:4px 0 24px rgba(13,13,13,0.12);}
-  .sidebar-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;gap:10px;}
-  .sidebar-logo{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;}
-  .sidebar-logo svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;}
-  .sidebar-brand{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:0.1em;text-transform:uppercase;}
-  .sidebar-sub{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.15em;text-transform:uppercase;}
-  .sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;}
-  .nav-label{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.2em;text-transform:uppercase;padding:12px 12px 6px;}
-  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;transition:all 0.2s ease;color:rgba(255,255,255,0.5);font-size:13px;border:none;background:transparent;width:100%;text-align:left;}
-  .nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
-  .nav-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.8);}
-  .nav-item.active{background:rgba(201,168,76,0.15);color:var(--gold);}
-  .nav-item.active svg{stroke:var(--gold);}
-  .sidebar-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06);}
-  .sidebar-badge{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--gold);line-height:1.5;}
-  .main{margin-left:240px;min-height:100vh;padding:32px;position:relative;z-index:1;}
-  .page{display:none;flex-direction:column;gap:24px;}
-  .page.active{display:flex;animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  .page-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);}
-  .page-subtitle{font-size:13px;color:var(--muted);margin-top:4px;}
-  .card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(13,13,13,0.05);}
-  .card-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
-  .card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+/* ── APP ── */
+#app-screen{display:none;min-height:100vh;}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--ink);display:flex;flex-direction:column;z-index:50;}
+.sb-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;gap:10px;}
+.sb-logo{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.sb-logo svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.sb-brand{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:.1em;text-transform:uppercase;}
+.sb-sub{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.15em;text-transform:uppercase;}
+.sb-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px;}
+.nav-lbl{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:.2em;text-transform:uppercase;padding:12px 12px 6px;}
+.nav-btn{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.5);font-size:13px;border:none;background:transparent;width:100%;text-align:left;font-family:'DM Sans',sans-serif;}
+.nav-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
+.nav-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);}
+.nav-btn.active{background:rgba(201,168,76,.15);color:var(--gold);}
+.nav-btn.active svg{stroke:var(--gold);}
+.sb-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,.06);}
+.sb-badge{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--gold);line-height:1.5;}
+.main{margin-left:240px;min-height:100vh;padding:32px;position:relative;z-index:1;}
 
-  /* Form */
-  .fields{display:flex;flex-direction:column;gap:14px;}
-  .field{display:flex;flex-direction:column;gap:7px;}
-  label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;}
-  .input-wrap{position:relative;display:flex;align-items:center;}
-  .input-wrap svg{position:absolute;left:13px;width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.5;pointer-events:none;}
-  input{width:100%;padding:13px 13px 13px 40px;border:1.5px solid rgba(13,13,13,0.1);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--paper);transition:all 0.2s ease;outline:none;-webkit-appearance:none;}
-  input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px var(--gold-dim);}
-  input::placeholder{color:#bbb;font-weight:300;}
-  .btn{width:100%;padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;margin-top:16px;}
-  .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold) 0%,transparent 60%);opacity:0;transition:opacity 0.3s ease;}
-  .btn:hover::before{opacity:0.15;}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(13,13,13,0.2);}
-  .btn:active{transform:translateY(0);}
-  .btn.loading{pointer-events:none;opacity:0.7;}
-  .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;position:relative;z-index:1;}
-  .btn span{position:relative;z-index:1;}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),#a8832a);box-shadow:0 4px 20px rgba(201,168,76,0.3);}
-  .btn-gold:hover{box-shadow:0 8px 32px rgba(201,168,76,0.4);}
-  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid rgba(13,13,13,0.15);margin-top:0;}
-  .btn-outline:hover{border-color:var(--ink);background:rgba(13,13,13,0.04);}
-  .btn-outline:hover::before{opacity:0;}
+/* ── PAGES ── */
+.page{display:none;flex-direction:column;gap:24px;}
+.page.active{display:flex;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--ink);}
+.page-sub{font-size:13px;color:var(--muted);margin-top:4px;}
+.card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(13,13,13,.05);}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
+.card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
 
-  /* Scanner */
-  .scanner-hero{display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px 28px;text-align:center;}
-  .scanner-icon-wrap{width:100px;height:100px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(13,13,13,0.2);}
-  .scanner-icon-wrap::before{content:'';position:absolute;inset:-6px;border:2px solid var(--gold);border-radius:50%;opacity:0.4;animation:scanPulse 2s ease infinite;}
-  .scanner-icon-wrap::after{content:'';position:absolute;inset:-14px;border:1px solid var(--gold);border-radius:50%;opacity:0.15;animation:scanPulse 2s ease infinite 0.5s;}
-  @keyframes scanPulse{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.06);opacity:0.6}}
-  .scanner-icon-wrap svg{width:44px;height:44px;stroke:var(--gold);fill:none;stroke-width:1.2;}
-  .scanner-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);}
-  .scanner-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:320px;}
+/* ── FORMS ── */
+.fields{display:flex;flex-direction:column;gap:14px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;}
+.iw{position:relative;display:flex;align-items:center;}
+.iw svg{position:absolute;left:13px;width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.5;pointer-events:none;}
+.iw input{width:100%;padding:13px 13px 13px 40px;border:1.5px solid rgba(13,13,13,.1);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--paper);outline:none;-webkit-appearance:none;transition:all .2s;}
+.iw input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px var(--gold-dim);}
+.iw input::placeholder{color:#bbb;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 
-  .scanner-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px;}
-  .step{background:var(--paper);border-radius:12px;padding:16px 12px;text-align:center;border:1px solid rgba(13,13,13,0.05);}
-  .step-num{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
-  .step-text{font-size:11px;color:var(--muted);line-height:1.5;}
+/* ── BUTTONS ── */
+.btn{width:100%;padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.btn:hover::before{opacity:.15;}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(13,13,13,.2);}
+.btn:active{transform:translateY(0);}
+.btn.loading{pointer-events:none;opacity:.7;}
+.btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#a8832a);box-shadow:0 4px 20px rgba(201,168,76,.3);}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid rgba(13,13,13,.15);}
+.btn-outline:hover::before{opacity:0;}
+.btn-outline:hover{border-color:var(--ink);background:rgba(13,13,13,.04);box-shadow:none;}
+.btn-sm{padding:10px 18px;width:auto;font-size:13px;}
+.mt{margin-top:16px;}
 
-  /* Viewfinder */
-  #viewfinder-wrap{display:none;flex-direction:column;gap:16px;align-items:center;}
-  .viewfinder{width:100%;max-width:500px;position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3;}
-  #camera-video{width:100%;height:100%;object-fit:cover;}
-  .vf-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-  .vf-frame{width:75%;height:55%;border:2px solid var(--gold);border-radius:8px;position:relative;box-shadow:0 0 0 2000px rgba(0,0,0,0.4);}
-  .vf-corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid;}
-  .vf-corner.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:4px 0 0 0;}
-  .vf-corner.tr{top:-2px;right:-2px;border-width:3px 3px 0 0;border-radius:0 4px 0 0;}
-  .vf-corner.bl{bottom:-2px;left:-2px;border-width:0 0 3px 3px;border-radius:0 0 0 4px;}
-  .vf-corner.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 4px 0;}
-  .scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanLine 2s ease-in-out infinite;}
-  @keyframes scanLine{0%{top:10%}50%{top:85%}100%{top:10%}}
-  .vf-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;}
+/* ── SCANNER ── */
+.scan-hero{display:flex;flex-direction:column;align-items:center;gap:20px;padding:36px 24px;text-align:center;}
+.scan-icon{width:96px;height:96px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(13,13,13,.2);}
+.scan-icon::before,.scan-icon::after{content:'';position:absolute;border-radius:50%;border:1.5px solid var(--gold);animation:pulse 2s ease infinite;}
+.scan-icon::before{inset:-8px;opacity:.35;}
+.scan-icon::after{inset:-18px;opacity:.15;animation-delay:.6s;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.scan-icon svg{width:42px;height:42px;stroke:var(--gold);fill:none;stroke-width:1.3;}
+.scan-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);}
+.scan-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:320px;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
+.step{background:var(--paper);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid rgba(13,13,13,.05);}
+.step-n{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+.step-t{font-size:11px;color:var(--muted);line-height:1.5;}
 
-  /* Résultat scan */
-  #scan-result{display:none;animation:fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both;}
-  .result-card{background:var(--green-bg);border:1.5px solid rgba(26,107,60,0.2);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:16px;}
-  .result-header{display:flex;align-items:center;gap:12px;}
-  .result-check{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .result-check svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.5;}
-  .result-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--green);}
-  .result-sub{font-size:12px;color:rgba(26,107,60,0.7);}
-  .result-info{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .result-field{background:#fff;border-radius:10px;padding:12px 14px;}
-  .result-field-lbl{font-size:10px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;}
-  .result-field-val{font-size:15px;color:var(--ink);font-weight:500;}
-  .result-field.full{grid-column:1/-1;}
+/* viewfinder */
+#vf-wrap{display:none;flex-direction:column;align-items:center;gap:16px;}
+.vf{width:100%;max-width:500px;position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3;}
+#cam-video{width:100%;height:100%;object-fit:cover;}
+#cam-canvas{display:none;}
+.vf-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.vf-frame{width:76%;height:56%;border:2px solid var(--gold);border-radius:8px;position:relative;box-shadow:0 0 0 9999px rgba(0,0,0,.45);}
+.vfc{position:absolute;width:18px;height:18px;border-color:var(--gold);border-style:solid;}
+.vfc.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:4px 0 0 0;}
+.vfc.tr{top:-2px;right:-2px;border-width:3px 3px 0 0;border-radius:0 4px 0 0;}
+.vfc.bl{bottom:-2px;left:-2px;border-width:0 0 3px 3px;border-radius:0 0 0 4px;}
+.vfc.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 4px 0;}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanAnim 2s ease-in-out infinite;}
+@keyframes scanAnim{0%{top:8%}50%{top:88%}100%{top:8%}}
+.vf-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,.65);letter-spacing:.08em;text-transform:uppercase;}
+.vf-btns{display:flex;gap:10px;width:100%;max-width:500px;}
 
-  /* Timeline SMS */
-  .sms-timeline{display:flex;flex-direction:column;gap:0;}
-  .sms-item{display:flex;gap:14px;align-items:flex-start;padding:12px 0;position:relative;}
-  .sms-item:not(:last-child)::after{content:'';position:absolute;left:17px;top:42px;bottom:-2px;width:1px;background:rgba(13,13,13,0.08);}
-  .sms-dot{width:34px;height:34px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
-  .sms-dot svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.5;}
-  .sms-dot.immediate{background:var(--green);}
-  .sms-dot.immediate svg{stroke:#fff;}
-  .sms-content{flex:1;padding-top:6px;}
-  .sms-timing{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px;}
-  .sms-timing.immediate{color:var(--green);}
-  .sms-title{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:2px;}
-  .sms-preview{font-size:12px;color:var(--muted);line-height:1.5;font-style:italic;}
+/* résultat */
+#scan-result{display:none;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;}
+.res-card{background:var(--green-bg);border:1.5px solid rgba(26,107,60,.2);border-radius:var(--radius);padding:22px 24px;display:flex;flex-direction:column;gap:14px;}
+.res-head{display:flex;align-items:center;gap:12px;}
+.res-check{width:38px;height:38px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.res-check svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.5;}
+.res-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--green);}
+.res-sub{font-size:12px;color:rgba(26,107,60,.6);}
+.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.res-f{background:#fff;border-radius:10px;padding:11px 14px;}
+.res-f.full{grid-column:1/-1;}
+.res-lbl{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
+.res-val{font-size:15px;color:var(--ink);font-weight:500;}
+.res-err{background:#fdf0f0;border:1.5px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:18px 20px;font-size:13px;color:#c0392b;line-height:1.6;}
+.res-btns{display:flex;gap:10px;}
 
-  /* Historique */
-  .history-list{display:flex;flex-direction:column;gap:8px;}
-  .history-item{background:var(--surface);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;border:1px solid rgba(13,13,13,0.05);transition:all 0.15s ease;}
-  .history-item:hover{box-shadow:var(--shadow-sm);}
-  .history-avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);flex-shrink:0;}
-  .history-info{flex:1;}
-  .history-name{font-size:14px;color:var(--ink);font-weight:500;}
-  .history-meta{font-size:12px;color:var(--muted);margin-top:2px;}
-  .history-badge{font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500;}
-  .badge-sent{background:rgba(26,107,60,0.1);color:var(--green);}
-  .badge-pending{background:var(--gold-dim);color:#7a5a00;}
+/* timeline */
+.timeline{display:flex;flex-direction:column;}
+.tl-item{display:flex;gap:14px;padding:12px 0;position:relative;}
+.tl-item:not(:last-child)::after{content:'';position:absolute;left:16px;top:40px;bottom:-2px;width:1px;background:rgba(13,13,13,.08);}
+.tl-dot{width:32px;height:32px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.tl-dot svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.tl-dot.now{background:var(--green);}
+.tl-dot.now svg{stroke:#fff;}
+.tl-info{flex:1;padding-top:5px;}
+.tl-when{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;}
+.tl-when.now{color:var(--green);}
+.tl-title{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:2px;}
+.tl-msg{font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;}
 
-  /* Formulaire manuel */
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+/* historique */
+.hist-list{display:flex;flex-direction:column;gap:8px;}
+.hist-item{background:var(--surface);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;border:1px solid rgba(13,13,13,.05);}
+.hist-av{width:36px;height:36px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);flex-shrink:0;}
+.hist-info{flex:1;}
+.hist-name{font-size:14px;color:var(--ink);font-weight:500;}
+.hist-meta{font-size:12px;color:var(--muted);margin-top:1px;}
+.badge-ok{font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(26,107,60,.1);color:var(--green);font-weight:500;}
 
-  /* Toast */
-  .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(13,13,13,0.25);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);z-index:300;white-space:nowrap;}
-  .toast.show{transform:translateX(-50%) translateY(0);}
-  .toast.success{background:#1a3a2a;}
-  .toast.error{background:#3a1a1a;}
-  .toast svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+/* toast */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(13,13,13,.25);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:999;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.ok{background:#1a3a2a;}
+.toast.err{background:#3a1a1a;}
+.toast svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin .8s linear infinite;transform-origin:center;}
 
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .spinner{animation:spin 0.8s linear infinite;transform-origin:center;}
-
-  @media(max-width:900px){
-    .sidebar{width:60px;}
-    .sidebar-brand,.sidebar-sub,.nav-label,.nav-item span,.sidebar-badge{display:none;}
-    .nav-item{justify-content:center;padding:12px;}
-    .main{margin-left:60px;padding:20px;}
-    .scanner-steps{grid-template-columns:1fr;}
-    .result-info{grid-template-columns:1fr;}
-    .grid-2{grid-template-columns:1fr;}
-  }
-  @media(max-width:600px){
-    .sidebar{display:none;}
-    .main{margin-left:0;padding:16px;}
-  }
+@media(max-width:900px){
+  .sidebar{width:60px;}
+  .sb-brand,.sb-sub,.nav-lbl,.nav-btn span,.sb-badge{display:none;}
+  .nav-btn{justify-content:center;padding:12px;}
+  .main{margin-left:60px;padding:20px;}
+  .steps{grid-template-columns:1fr;}
+  .res-grid{grid-template-columns:1fr;}
+  .g2{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .sidebar{display:none;}
+  .main{margin-left:0;padding:16px;}
+}
 </style>
 </head>
 <body>
@@ -205,15 +206,25 @@
       <div class="pin-card-title">Accès équipe</div>
       <p class="pin-card-desc">Entrez votre code PIN pour accéder à l'interface.</p>
       <div class="pin-dots">
-        <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
-        <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+        <div class="pin-dot" id="d0"></div>
+        <div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div>
+        <div class="pin-dot" id="d3"></div>
       </div>
-      <div class="pin-error" id="pin-error"></div>
+      <div class="pin-error" id="pin-err"></div>
       <div class="keypad">
-        <button class="key" onclick="pressKey('1')">1</button><button class="key" onclick="pressKey('2')">2</button><button class="key" onclick="pressKey('3')">3</button>
-        <button class="key" onclick="pressKey('4')">4</button><button class="key" onclick="pressKey('5')">5</button><button class="key" onclick="pressKey('6')">6</button>
-        <button class="key" onclick="pressKey('7')">7</button><button class="key" onclick="pressKey('8')">8</button><button class="key" onclick="pressKey('9')">9</button>
-        <button class="key key-empty"></button><button class="key" onclick="pressKey('0')">0</button><button class="key" onclick="deleteKey()">⌫</button>
+        <button class="key" id="k1">1</button>
+        <button class="key" id="k2">2</button>
+        <button class="key" id="k3">3</button>
+        <button class="key" id="k4">4</button>
+        <button class="key" id="k5">5</button>
+        <button class="key" id="k6">6</button>
+        <button class="key" id="k7">7</button>
+        <button class="key" id="k8">8</button>
+        <button class="key" id="k9">9</button>
+        <button class="key key-empty"></button>
+        <button class="key" id="k0">0</button>
+        <button class="key" id="kdel">⌫</button>
       </div>
     </div>
   </div>
@@ -222,116 +233,115 @@
 <!-- APP -->
 <div id="app-screen">
   <div class="sidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo"><svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><line x1="11" y1="12" x2="13" y2="12"/></svg></div>
-      <div class="sidebar-brand">House Optic</div>
-      <div class="sidebar-sub">Espace équipe</div>
+    <div class="sb-header">
+      <div class="sb-logo"><svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><line x1="11" y1="12" x2="13" y2="12"/></svg></div>
+      <div class="sb-brand">House Optic</div>
+      <div class="sb-sub">Espace équipe</div>
     </div>
-    <div class="sidebar-nav">
-      <div class="nav-label">Navigation</div>
-      <button class="nav-item active" onclick="showPage('scanner',this)">
+    <div class="sb-nav">
+      <div class="nav-lbl">Navigation</div>
+      <button class="nav-btn active" id="nav-scanner">
         <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
         <span>Scanner une fiche</span>
       </button>
-      <button class="nav-item" onclick="showPage('historique',this)">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>Historique</span>
-      </button>
-      <button class="nav-item" onclick="showPage('manuel',this)">
+      <button class="nav-btn" id="nav-manuel">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Saisie manuelle</span>
       </button>
+      <button class="nav-btn" id="nav-historique">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Historique</span>
+      </button>
     </div>
-    <div class="sidebar-footer">
-      <div class="sidebar-badge">Clara est active<br>24h/24 · 7j/7</div>
+    <div class="sb-footer">
+      <div class="sb-badge">Clara est active<br>24h/24 · 7j/7</div>
     </div>
   </div>
 
   <div class="main">
 
-    <!-- SCANNER PAGE -->
+    <!-- PAGE SCANNER -->
     <div class="page active" id="page-scanner">
-      <div><div class="page-title">Scanner une fiche</div><div class="page-subtitle">Pointez la caméra sur le code-barres de la fiche client</div></div>
+      <div>
+        <div class="page-title">Scanner une fiche</div>
+        <div class="page-sub">Pointez la caméra sur le code-barres pour tout déclencher automatiquement</div>
+      </div>
 
-      <!-- État 1 : accueil scanner -->
-      <div id="scanner-home">
+      <!-- Accueil scanner -->
+      <div id="scan-home">
         <div class="card">
-          <div class="scanner-hero">
-            <div class="scanner-icon-wrap">
+          <div class="scan-hero">
+            <div class="scan-icon">
               <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
             </div>
             <div>
-              <div class="scanner-title">Prêt à scanner</div>
-              <p class="scanner-desc">Positionnez la fiche client devant la caméra. L'application lit automatiquement le nom et le numéro de téléphone.</p>
+              <div class="scan-title">Prêt à scanner</div>
+              <p class="scan-desc">Positionnez la fiche client devant la caméra. Le nom et le téléphone sont extraits automatiquement.</p>
             </div>
           </div>
-          <div class="scanner-steps">
-            <div class="step"><div class="step-num">1</div><div class="step-text">Appuyez sur Scanner</div></div>
-            <div class="step"><div class="step-num">2</div><div class="step-text">Pointez sur le code-barres</div></div>
-            <div class="step"><div class="step-num">3</div><div class="step-text">Confirmez et envoyez</div></div>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-t">Appuyez sur Scanner</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-t">Pointez sur le code-barres</div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-t">Confirmez et envoyez</div></div>
           </div>
-          <button class="btn btn-gold" onclick="startScanner(this)" style="margin-top:20px;">
+          <button class="btn btn-gold mt" id="btn-start-scanner">
             <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
             <span>Scanner la fiche</span>
           </button>
         </div>
-
-        <!-- Timeline SMS informatif -->
         <div class="card">
-          <div class="card-title">Ce qui se passe après le scan</div>
-          <p class="card-desc">Une seule action déclenche tout automatiquement.</p>
-          <div class="sms-timeline">
-            <div class="sms-item">
-              <div class="sms-dot immediate"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
-              <div class="sms-content">
-                <div class="sms-timing immediate">Immédiat</div>
-                <div class="sms-title">SMS — Lunettes arrivées</div>
-                <div class="sms-preview">"Bonjour [Prénom], votre équipement est prêt ! Venez le récupérer chez House Optic…"</div>
+          <div class="card-title">Ce qui se déclenche automatiquement</div>
+          <p class="card-desc">Un seul scan, trois actions automatiques.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-dot now"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+              <div class="tl-info">
+                <div class="tl-when now">Immédiat</div>
+                <div class="tl-title">SMS — Lunettes arrivées</div>
+                <div class="tl-msg">"Bonjour [Prénom], votre équipement est prêt ! Venez le récupérer chez House Optic…"</div>
               </div>
             </div>
-            <div class="sms-item">
-              <div class="sms-dot"><svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div>
-              <div class="sms-content">
-                <div class="sms-timing">J + 7</div>
-                <div class="sms-title">SMS — Satisfaction & avis Google</div>
-                <div class="sms-preview">"Tout s'est bien passé ? Laissez-nous un avis, ça nous aide beaucoup…"</div>
+            <div class="tl-item">
+              <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="tl-info">
+                <div class="tl-when">J + 7</div>
+                <div class="tl-title">SMS — Satisfaction & avis Google</div>
+                <div class="tl-msg">"Tout s'est bien passé ? Laissez-nous un avis, ça nous aide beaucoup…"</div>
               </div>
             </div>
-            <div class="sms-item">
-              <div class="sms-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-              <div class="sms-content">
-                <div class="sms-timing">J + 365</div>
-                <div class="sms-title">SMS — Réactivation client</div>
-                <div class="sms-preview">"Cela fait un an que nous vous avons accueilli. Nos nouvelles collections sont arrivées…"</div>
+            <div class="tl-item">
+              <div class="tl-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="tl-info">
+                <div class="tl-when">J + 365</div>
+                <div class="tl-title">SMS — Réactivation client</div>
+                <div class="tl-msg">"Cela fait un an que nous vous avons accueilli. Nos nouvelles collections sont arrivées…"</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- État 2 : viewfinder caméra -->
-      <div id="viewfinder-wrap">
-        <div class="card" style="width:100%;max-width:560px;">
-          <div class="viewfinder">
-            <video id="camera-video" autoplay playsinline muted></video>
-            <canvas id="camera-canvas" style="display:none;"></canvas>
-            <div class="vf-overlay">
+      <!-- Viewfinder -->
+      <div id="vf-wrap">
+        <div class="card" style="width:100%;max-width:540px;padding:20px;">
+          <div class="vf">
+            <video id="cam-video" autoplay playsinline muted></video>
+            <canvas id="cam-canvas"></canvas>
+            <div class="vf-ov">
               <div class="vf-frame">
-                <div class="vf-corner tl"></div>
-                <div class="vf-corner tr"></div>
-                <div class="vf-corner bl"></div>
-                <div class="vf-corner br"></div>
+                <div class="vfc tl"></div><div class="vfc tr"></div>
+                <div class="vfc bl"></div><div class="vfc br"></div>
                 <div class="scan-line"></div>
               </div>
             </div>
-            <div class="vf-label">Alignez la fiche dans le cadre</div>
+            <div class="vf-hint">Alignez la fiche dans le cadre</div>
           </div>
-          <div style="display:flex;gap:10px;margin-top:16px;">
-            <button class="btn btn-gold" onclick="capturePhoto(this)" style="margin-top:0;flex:1;">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M20.94 11A8.994 8.994 0 1 1 12.45 3.1"/></svg>
+          <div class="vf-btns" style="margin-top:14px;">
+            <button class="btn btn-gold" id="btn-capture" style="flex:1;">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M20.94 11A9 9 0 1 1 12 3"/></svg>
               <span>Analyser la fiche</span>
             </button>
-            <button class="btn btn-outline" onclick="cancelScanner()" style="flex:0 0 auto;width:auto;padding:15px 20px;">
+            <button class="btn btn-outline" id="btn-cancel-scan" style="width:auto;padding:15px 18px;">
               <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               <span>Annuler</span>
             </button>
@@ -339,39 +349,31 @@
         </div>
       </div>
 
-      <!-- État 3 : résultat OCR + confirmation -->
+      <!-- Résultat -->
       <div id="scan-result">
-        <div class="card" style="max-width:560px;">
-          <div class="result-card" id="result-card">
-            <div class="result-header">
-              <div class="result-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="card" style="max-width:540px;">
+          <div id="res-ok" class="res-card">
+            <div class="res-head">
+              <div class="res-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
               <div>
-                <div class="result-title">Fiche lue avec succès</div>
-                <div class="result-sub">Vérifiez les informations avant d'envoyer</div>
+                <div class="res-title">Fiche lue avec succès</div>
+                <div class="res-sub">Vérifiez les informations avant d'envoyer</div>
               </div>
             </div>
-            <div class="result-info">
-              <div class="result-field full">
-                <div class="result-field-lbl">Nom du client</div>
-                <div class="result-field-val" id="result-name">—</div>
-              </div>
-              <div class="result-field full">
-                <div class="result-field-lbl">Téléphone</div>
-                <div class="result-field-val" id="result-phone">—</div>
-              </div>
+            <div class="res-grid">
+              <div class="res-f full"><div class="res-lbl">Nom du client</div><div class="res-val" id="res-name">—</div></div>
+              <div class="res-f full"><div class="res-lbl">Téléphone</div><div class="res-val" id="res-phone">—</div></div>
             </div>
           </div>
-
-          <div id="result-error" style="display:none;" class="result-card" style="background:#fdf0f0;border-color:rgba(192,57,43,0.2);">
-            <p style="font-size:13px;color:#c0392b;">Impossible de lire la fiche. Vérifiez l'éclairage et réessayez, ou utilisez la saisie manuelle.</p>
+          <div id="res-err" class="res-err" style="display:none;">
+            Impossible de lire la fiche. Vérifiez l'éclairage et réessayez, ou utilisez la saisie manuelle.
           </div>
-
-          <div style="display:flex;gap:10px;margin-top:16px;">
-            <button class="btn btn-gold" id="confirm-send-btn" onclick="confirmAndSend(this)" style="margin-top:0;flex:1;">
+          <div class="res-btns" style="margin-top:14px;">
+            <button class="btn btn-gold" id="btn-confirm-send" style="flex:1;">
               <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
               <span>Confirmer et envoyer</span>
             </button>
-            <button class="btn btn-outline" onclick="resetScanner()" style="flex:0 0 auto;width:auto;padding:15px 20px;margin-top:0;">
+            <button class="btn btn-outline" id="btn-rescan" style="width:auto;padding:15px 18px;">
               <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
               <span>Rescanner</span>
             </button>
@@ -380,46 +382,51 @@
       </div>
     </div>
 
-    <!-- HISTORIQUE PAGE -->
-    <div class="page" id="page-historique">
-      <div><div class="page-title">Historique</div><div class="page-subtitle">Fiches scannées et SMS envoyés</div></div>
-      <div class="card">
-        <div class="card-title">Envois récents</div>
-        <div class="history-list" id="history-list">
-          <p style="font-size:13px;color:var(--muted);text-align:center;padding:24px;">Aucun envoi pour l'instant.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SAISIE MANUELLE PAGE -->
+    <!-- PAGE MANUELLE -->
     <div class="page" id="page-manuel">
-      <div><div class="page-title">Saisie manuelle</div><div class="page-subtitle">Si le scan ne fonctionne pas</div></div>
-
+      <div>
+        <div class="page-title">Saisie manuelle</div>
+        <div class="page-sub">Si le scan ne fonctionne pas</div>
+      </div>
       <div class="card" style="max-width:520px;">
-        <div class="card-title">Lunettes arrivées</div>
-        <p class="card-desc">Déclenche le SMS immédiat + J+7 + J+365 automatiquement.</p>
+        <div class="card-title">Déclencher les envois</div>
+        <p class="card-desc">SMS immédiat + J+7 + J+365 automatiquement.</p>
         <div class="fields">
-          <div class="grid-2">
+          <div class="g2">
             <div class="field">
               <label>Prénom et nom</label>
-              <div class="input-wrap">
+              <div class="iw">
                 <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 <input type="text" id="m-name" placeholder="ex. Sophie Martin">
               </div>
             </div>
             <div class="field">
               <label>Téléphone</label>
-              <div class="input-wrap">
+              <div class="iw">
                 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 <input type="tel" id="m-phone" placeholder="06 12 34 56 78">
               </div>
             </div>
           </div>
         </div>
-        <button class="btn" onclick="sendManuel(this)">
+        <button class="btn mt" id="btn-manuel">
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           <span>Déclencher les envois</span>
         </button>
+      </div>
+    </div>
+
+    <!-- PAGE HISTORIQUE -->
+    <div class="page" id="page-historique">
+      <div>
+        <div class="page-title">Historique</div>
+        <div class="page-sub">Fiches scannées et SMS envoyés</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Envois récents</div>
+        <div class="hist-list" id="hist-list">
+          <p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l'instant.</p>
+        </div>
       </div>
     </div>
 
@@ -428,237 +435,326 @@
 
 <!-- Toast -->
 <div class="toast" id="toast">
-  <svg id="toast-icon" viewBox="0 0 24 24"></svg>
+  <svg id="toast-ico" viewBox="0 0 24 24"></svg>
   <span id="toast-msg"></span>
 </div>
 
-<script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
 <script>
-  // ── CONFIG ────────────────────────────────────────────────────
-  const WEBHOOK_LUNETTES = 'https://yaniszedira.app.n8n.cloud/webhook/lunettes-arrivees';
-  const WEBHOOK_SUIVI    = 'https://yaniszedira.app.n8n.cloud/webhook/suivi-client';
-  const PIN_HASH         = '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
+(function() {
+  'use strict';
+
+  // ── WEBHOOKS ──────────────────────────────────────────────────
+  var WH_LUNETTES = 'https://yaniszedira.app.n8n.cloud/webhook/lunettes-arrivees';
+  var WH_SUIVI    = 'https://yaniszedira.app.n8n.cloud/webhook/suivi-client';
+  var PIN_HASH    = '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
+
+  // ── STATE ─────────────────────────────────────────────────────
+  var pinInput   = '';
+  var camStream  = null;
+  var scanName   = '';
+  var scanPhone  = '';
+
+  // ── UTILS ─────────────────────────────────────────────────────
+  function fmtPhone(r) {
+    var d = r.replace(/[\s.\-]/g, '');
+    if (d.startsWith('+33')) return d;
+    if (d.startsWith('33'))  return '+' + d;
+    if (d.startsWith('0'))   return '+33' + d.slice(1);
+    return '+33' + d;
+  }
+
+  function showToast(msg, type) {
+    var t = document.getElementById('toast');
+    var ico = document.getElementById('toast-ico');
+    document.getElementById('toast-msg').textContent = msg;
+    ico.innerHTML = (type === 'ok')
+      ? '<polyline points="20 6 9 17 4 12"/>'
+      : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
+    t.className = 'toast ' + (type || 'ok');
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 4000);
+  }
+
+  var SEND_SVG = '<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
+  function setBtnLoad(btn, on, label) {
+    if (!btn) return;
+    if (on) {
+      btn.disabled = true;
+      btn.querySelector('svg').innerHTML = '<circle cx="12" cy="12" r="9" stroke-dasharray="28" stroke-dashoffset="8" class="spin"/>';
+      btn.querySelector('span').textContent = 'Envoi...';
+    } else {
+      btn.disabled = false;
+      btn.querySelector('svg').innerHTML = SEND_SVG;
+      btn.querySelector('span').textContent = label;
+    }
+  }
 
   // ── PIN ───────────────────────────────────────────────────────
-  let pinInput = '';
-  async function hashPin(p){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
-  function updateDots(){for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.toggle('filled',i<pinInput.length);d.classList.remove('error');}}
-  async function pressKey(k){if(pinInput.length>=4)return;pinInput+=k;updateDots();if(pinInput.length===4)await checkPin();}
-  function deleteKey(){pinInput=pinInput.slice(0,-1);updateDots();document.getElementById('pin-error').textContent='';}
-  async function checkPin(){
-    const h=await hashPin(pinInput);
-    if(h===PIN_HASH){
-      document.getElementById('pin-screen').style.display='none';
-      document.getElementById('app-screen').style.display='block';
-      renderHistory();
-    } else {
-      for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.remove('filled');d.classList.add('error');}
-      document.getElementById('pin-error').textContent='Code incorrect, réessayez.';
-      setTimeout(()=>{pinInput='';updateDots();document.getElementById('pin-error').textContent='';},1200);
+  async function hashPin(p) {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p));
+    return Array.from(new Uint8Array(buf)).map(function(x) { return x.toString(16).padStart(2,'0'); }).join('');
+  }
+
+  function updateDots() {
+    for (var i = 0; i < 4; i++) {
+      var d = document.getElementById('d' + i);
+      d.classList.toggle('filled', i < pinInput.length);
+      d.classList.remove('error');
     }
   }
-  document.addEventListener('keydown',e=>{if(document.getElementById('pin-screen').style.display==='none')return;if(e.key>='0'&&e.key<='9')pressKey(e.key);if(e.key==='Backspace')deleteKey();});
+
+  async function handleKey(k) {
+    if (pinInput.length >= 4) return;
+    pinInput += k;
+    updateDots();
+    if (pinInput.length === 4) {
+      var h = await hashPin(pinInput);
+      if (h === PIN_HASH) {
+        document.getElementById('pin-screen').style.display = 'none';
+        document.getElementById('app-screen').style.display = 'block';
+        renderHistory();
+      } else {
+        for (var i = 0; i < 4; i++) {
+          var dot = document.getElementById('d' + i);
+          dot.classList.remove('filled');
+          dot.classList.add('error');
+        }
+        document.getElementById('pin-err').textContent = 'Code incorrect, réessayez.';
+        setTimeout(function() {
+          pinInput = '';
+          updateDots();
+          document.getElementById('pin-err').textContent = '';
+        }, 1200);
+      }
+    }
+  }
+
+  function handleDel() {
+    pinInput = pinInput.slice(0, -1);
+    updateDots();
+    document.getElementById('pin-err').textContent = '';
+  }
+
+  // Attach keypad buttons
+  ['1','2','3','4','5','6','7','8','9','0'].forEach(function(n) {
+    document.getElementById('k' + n).addEventListener('click', function() { handleKey(n); });
+  });
+  document.getElementById('kdel').addEventListener('click', handleDel);
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('pin-screen').style.display === 'none') return;
+    if (e.key >= '0' && e.key <= '9') handleKey(e.key);
+    if (e.key === 'Backspace') handleDel();
+  });
 
   // ── NAVIGATION ────────────────────────────────────────────────
-  function showPage(page,el){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-    document.getElementById('page-'+page).classList.add('active');
-    el.classList.add('active');
-    if(page==='historique')renderHistory();
+  function showPage(pageId, navId) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById(pageId).classList.add('active');
+    document.getElementById(navId).classList.add('active');
   }
 
-  // ── SCANNER / CAMÉRA ─────────────────────────────────────────
-  let stream = null;
-  let scannedName = '', scannedPhone = '';
+  document.getElementById('nav-scanner').addEventListener('click', function() {
+    showPage('page-scanner', 'nav-scanner');
+  });
+  document.getElementById('nav-manuel').addEventListener('click', function() {
+    showPage('page-manuel', 'nav-manuel');
+  });
+  document.getElementById('nav-historique').addEventListener('click', function() {
+    showPage('page-historique', 'nav-historique');
+    renderHistory();
+  });
 
-  async function startScanner(btn) {
-    const orig = btn.querySelector('span').textContent;
-    btn.classList.add('loading');
+  // ── SCANNER ───────────────────────────────────────────────────
+  document.getElementById('btn-start-scanner').addEventListener('click', startScanner);
+  document.getElementById('btn-capture').addEventListener('click', capturePhoto);
+  document.getElementById('btn-cancel-scan').addEventListener('click', cancelScanner);
+  document.getElementById('btn-confirm-send').addEventListener('click', confirmSend);
+  document.getElementById('btn-rescan').addEventListener('click', rescan);
+
+  async function startScanner() {
+    var btn = document.getElementById('btn-start-scanner');
+    btn.disabled = true;
     btn.querySelector('span').textContent = 'Activation caméra...';
     try {
-      stream = await navigator.mediaDevices.getUserMedia({
+      camStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }
       });
-      document.getElementById('camera-video').srcObject = stream;
-      document.getElementById('scanner-home').style.display = 'none';
+      document.getElementById('cam-video').srcObject = camStream;
+      document.getElementById('scan-home').style.display = 'none';
       document.getElementById('scan-result').style.display = 'none';
-      document.getElementById('viewfinder-wrap').style.display = 'flex';
+      document.getElementById('vf-wrap').style.display = 'flex';
     } catch(e) {
-      showToast('Caméra non disponible. Utilisez la saisie manuelle.', 'error');
-      btn.classList.remove('loading');
-      btn.querySelector('span').textContent = orig;
+      showToast('Caméra non disponible. Utilisez la saisie manuelle.', 'err');
     }
-    btn.classList.remove('loading');
-    btn.querySelector('span').textContent = orig;
+    btn.disabled = false;
+    btn.querySelector('span').textContent = 'Scanner la fiche';
   }
 
-  async function capturePhoto(btn) {
-    const video = document.getElementById('camera-video');
-    const canvas = document.getElementById('camera-canvas');
+  async function capturePhoto() {
+    var btn = document.getElementById('btn-capture');
+    var video = document.getElementById('cam-video');
+    var canvas = document.getElementById('cam-canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
+    canvas.getContext('2d').drawImage(video, 0, 0);
 
-    btn.classList.add('loading');
+    btn.disabled = true;
     btn.querySelector('span').textContent = 'Lecture en cours...';
 
     try {
-      // Tesseract OCR — 100% gratuit, tourne dans le navigateur
-      const { data: { text } } = await Tesseract.recognize(canvas, 'fra', {
-        logger: () => {}
-      });
+      var blob = await new Promise(function(res) { canvas.toBlob(res, 'image/jpeg', 0.92); });
+      var fd = new FormData();
+      fd.append('file', blob, 'fiche.jpg');
+      fd.append('language', 'fre');
+      fd.append('isOverlayRequired', 'false');
+      fd.append('detectOrientation', 'true');
+      fd.append('scale', 'true');
+      fd.append('OCREngine', '2');
+      fd.append('apikey', 'K81978787388957');
+
+      var resp = await fetch('https://api.ocr.space/parse/image', { method: 'POST', body: fd });
+      var data = await resp.json();
+      var text = (data.ParsedResults && data.ParsedResults[0]) ? data.ParsedResults[0].ParsedText : '';
 
       stopCamera();
 
-      // Extraction nom — cherche "M. NOM Prenom" ou "Mme NOM Prenom" ou "NOM Prenom" en majuscules
-      let nom = null, telephone = null;
+      var nom = null, tel = null;
 
-      // Pattern téléphone — cherche 10 chiffres groupés
-      const telMatch = text.match(/(?:Téléphone\s*:\s*)?(\+?33\s*[\d\s]{9,14}|0[67]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2})/i);
-      if(telMatch) telephone = telMatch[1].replace(/\s+/g,'').replace(/^33/,'+33');
+      // Extraire téléphone
+      var telM = text.match(/(0[6-9][\s.]?\d{2}[\s.]?\d{2}[\s.]?\d{2}[\s.]?\d{2})/);
+      if (telM) tel = telM[1].replace(/[\s.]/g, '');
 
-      // Pattern nom — ligne avec "M." ou "Mme" ou majuscules
-      const nomMatch = text.match(/(?:M\.|Mme\.?|MME\.?)\s+([A-ZÉÈÊÀÂÎÏÔÙÛÜ][A-ZÉÈÊÀÂÎÏÔÙÛÜa-zéèêàâîïôùûü\s\-]+?)(?:
-|$)/);
-      if(nomMatch) nom = nomMatch[1].trim();
+      // Extraire nom — ligne "M. NOM Prenom"
+      var nomM = text.match(/(?:M\.|Mme\.?)\s+([A-Z][A-Za-z\u00C0-\u017E\s\-]{2,30})/);
+      if (nomM) nom = nomM[1].trim();
 
-      // Fallback — cherche une ligne en MAJUSCULES qui ressemble à un nom
-      if(!nom) {
-        const lines = text.split('
-').map(l => l.trim()).filter(l => l.length > 3);
-        for(const line of lines) {
-          if(/^[A-ZÉÈÊ][A-ZÉÈÊ\s\-]{3,}$/.test(line) && !line.match(/VISITE|TELEPHONE|EQUIPEMENT|LIVR|PAIEMENT|TIERS|DATE/i)) {
+      // Fallback — ligne en MAJUSCULES
+      if (!nom) {
+        var lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(function(l) { return l.length > 3; });
+        for (var i = 0; i < lines.length; i++) {
+          var line = lines[i];
+          if (/^[A-Z\u00C0-\u00DC]{2,}(\s+[A-Za-z\u00C0-\u017E]+)+$/.test(line) &&
+              !/(VISITE|TELEPHONE|EQUIPEMENT|LIVR|PAIEMENT|TIERS|DATE|LENTILLE|OBSERVATION|HOUSE|OPTIC)/i.test(line)) {
             nom = line; break;
           }
         }
       }
 
-      if(nom && telephone) {
-        scannedName = nom;
-        scannedPhone = telephone;
-        document.getElementById('result-name').textContent = nom;
-        document.getElementById('result-phone').textContent = telephone;
-        document.getElementById('result-card').style.display = 'flex';
-        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'none';
-        document.getElementById('confirm-send-btn').style.display = 'flex';
-      } else if(telephone) {
-        // On a le téléphone mais pas le nom — on affiche quand même
-        scannedPhone = telephone;
-        scannedName = nom || 'Client';
-        document.getElementById('result-name').textContent = nom || '— Non détecté';
-        document.getElementById('result-phone').textContent = telephone;
-        document.getElementById('result-card').style.display = 'flex';
-        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'none';
-        document.getElementById('confirm-send-btn').style.display = 'flex';
-      } else {
-        scannedName = '';
-        scannedPhone = '';
-        document.getElementById('result-card').style.display = 'none';
-        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'block';
-        document.getElementById('confirm-send-btn').style.display = 'none';
-      }
+      stopCamera();
+      document.getElementById('vf-wrap').style.display = 'none';
 
-      document.getElementById('viewfinder-wrap').style.display = 'none';
+      if (tel || nom) {
+        scanName = nom || 'Client';
+        scanPhone = tel || '';
+        document.getElementById('res-name').textContent = nom || '— Non détecté';
+        document.getElementById('res-phone').textContent = tel || '— Non détecté';
+        document.getElementById('res-ok').style.display = 'flex';
+        document.getElementById('res-err').style.display = 'none';
+        document.getElementById('btn-confirm-send').style.display = 'flex';
+      } else {
+        document.getElementById('res-ok').style.display = 'none';
+        document.getElementById('res-err').style.display = 'block';
+        document.getElementById('btn-confirm-send').style.display = 'none';
+      }
       document.getElementById('scan-result').style.display = 'block';
 
     } catch(e) {
       stopCamera();
-      showToast('Erreur de lecture. Réessayez ou saisissez manuellement.', 'error');
-      document.getElementById('viewfinder-wrap').style.display = 'none';
-      document.getElementById('scanner-home').style.display = 'block';
+      document.getElementById('vf-wrap').style.display = 'none';
+      document.getElementById('scan-home').style.display = 'block';
+      showToast('Erreur réseau. Réessayez ou saisie manuelle.', 'err');
     }
 
-    btn.classList.remove('loading');
+    btn.disabled = false;
     btn.querySelector('span').textContent = 'Analyser la fiche';
   }
 
-  function stopCamera(){
-    if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+  function stopCamera() {
+    if (camStream) { camStream.getTracks().forEach(function(t) { t.stop(); }); camStream = null; }
   }
 
-  function cancelScanner(){
+  function cancelScanner() {
     stopCamera();
-    document.getElementById('viewfinder-wrap').style.display='none';
-    document.getElementById('scanner-home').style.display='block';
+    document.getElementById('vf-wrap').style.display = 'none';
+    document.getElementById('scan-home').style.display = 'block';
   }
 
-  function resetScanner(){
-    document.getElementById('scan-result').style.display='none';
-    document.getElementById('scanner-home').style.display='block';
-    scannedName='';scannedPhone='';
+  function rescan() {
+    document.getElementById('scan-result').style.display = 'none';
+    document.getElementById('scan-home').style.display = 'block';
+    scanName = ''; scanPhone = '';
   }
 
-  async function confirmAndSend(btn) {
-    if(!scannedName||!scannedPhone){showToast('Informations manquantes.','error');return;}
-    setLoad(btn,true,'Envoi...');
-    await triggerSmsFlow(scannedName, scannedPhone, btn, 'Confirmer et envoyer');
-    resetScanner();
+  async function confirmSend() {
+    if (!scanPhone) { showToast('Numéro de téléphone manquant.', 'err'); return; }
+    var btn = document.getElementById('btn-confirm-send');
+    setBtnLoad(btn, true);
+    await triggerFlow(scanName, scanPhone);
+    setBtnLoad(btn, false, 'Confirmer et envoyer');
+    rescan();
   }
 
-  // ── ENVOI SMS FLOW (lunettes + suivi J+7) ────────────────────
-  async function triggerSmsFlow(name, phone, btn, btnLabel) {
-    const fmtP = fmtPhone(phone);
-    const today = new Date().toISOString().split('T')[0];
+  // ── SMS FLOW ──────────────────────────────────────────────────
+  async function triggerFlow(name, phone) {
+    var p = fmtPhone(phone);
+    var today = new Date().toISOString().split('T')[0];
     try {
-      // SMS lunettes arrivées immédiat
-      await fetch(`${WEBHOOK_LUNETTES}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtP)}`);
-      // Suivi J+7
-      await fetch(`${WEBHOOK_SUIVI}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtP)}&date=${encodeURIComponent(today)}`);
-      showToast('SMS envoyé à ' + name + ' · J+7 & J+365 programmés ✓', 'success');
+      await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p));
+      await fetch(WH_SUIVI    + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p) + '&date=' + encodeURIComponent(today));
+      showToast('SMS envoyé à ' + name + ' · J+7 & J+365 programmés ✓', 'ok');
       saveHistory(name, phone);
     } catch(e) {
-      showToast('Erreur réseau. Réessayez.', 'error');
+      showToast('Erreur réseau. Réessayez.', 'err');
     }
-    if(btn) setLoad(btn, false, btnLabel);
   }
 
-  // ── SAISIE MANUELLE ──────────────────────────────────────────
-  async function sendManuel(btn) {
-    const name = document.getElementById('m-name').value.trim();
-    const phone = document.getElementById('m-phone').value.trim();
-    if(!name||!phone){showToast('Remplissez tous les champs.','error');return;}
-    setLoad(btn,true,'Envoi...');
-    await triggerSmsFlow(name, phone, btn, 'Déclencher les envois');
-    document.getElementById('m-name').value='';
-    document.getElementById('m-phone').value='';
-  }
+  // ── MANUEL ────────────────────────────────────────────────────
+  document.getElementById('btn-manuel').addEventListener('click', async function() {
+    var btn = this;
+    var name  = document.getElementById('m-name').value.trim();
+    var phone = document.getElementById('m-phone').value.trim();
+    if (!name || !phone) { showToast('Remplissez tous les champs.', 'err'); return; }
+    setBtnLoad(btn, true);
+    await triggerFlow(name, phone);
+    setBtnLoad(btn, false, 'Déclencher les envois');
+    document.getElementById('m-name').value = '';
+    document.getElementById('m-phone').value = '';
+  });
 
-  // ── HISTORIQUE ───────────────────────────────────────────────
+  // ── HISTORIQUE ────────────────────────────────────────────────
   function saveHistory(name, phone) {
-    const history = JSON.parse(localStorage.getItem('ho_history')||'[]');
-    history.unshift({ name, phone, date: new Date().toLocaleDateString('fr-FR'), time: new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) });
-    if(history.length > 50) history.pop();
-    localStorage.setItem('ho_history', JSON.stringify(history));
+    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
+    hist.unshift({
+      name: name, phone: phone,
+      date: new Date().toLocaleDateString('fr-FR'),
+      time: new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })
+    });
+    if (hist.length > 50) hist.pop();
+    localStorage.setItem('ho_hist', JSON.stringify(hist));
     renderHistory();
   }
 
   function renderHistory() {
-    const list = document.getElementById('history-list');
-    if(!list) return;
-    const history = JSON.parse(localStorage.getItem('ho_history')||'[]');
-    if(!history.length) {
-      list.innerHTML='<p style="font-size:13px;color:var(--muted);text-align:center;padding:24px;">Aucun envoi pour l\'instant.</p>';
+    var list = document.getElementById('hist-list');
+    if (!list) return;
+    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
+    if (!hist.length) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l\'instant.</p>';
       return;
     }
-    list.innerHTML = history.map(h => `
-      <div class="history-item">
-        <div class="history-avatar">${h.name.charAt(0).toUpperCase()}</div>
-        <div class="history-info">
-          <div class="history-name">${h.name}</div>
-          <div class="history-meta">${h.phone} · ${h.date} à ${h.time}</div>
-        </div>
-        <span class="history-badge badge-sent">Envoyé ✓</span>
-      </div>
-    `).join('');
+    list.innerHTML = hist.map(function(h) {
+      return '<div class="hist-item">' +
+        '<div class="hist-av">' + h.name.charAt(0).toUpperCase() + '</div>' +
+        '<div class="hist-info"><div class="hist-name">' + h.name + '</div>' +
+        '<div class="hist-meta">' + h.phone + ' · ' + h.date + ' à ' + h.time + '</div></div>' +
+        '<span class="badge-ok">Envoyé ✓</span>' +
+      '</div>';
+    }).join('');
   }
 
-  // ── UTILS ─────────────────────────────────────────────────────
-  function fmtPhone(r){const d=r.replace(/[\s.\-]/g,'');if(d.startsWith('+33'))return d;if(d.startsWith('33'))return'+'+d;if(d.startsWith('0'))return'+33'+d.slice(1);return'+33'+d;}
-  function showToast(msg,type='success'){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;document.getElementById('toast-icon').innerHTML=type==='success'?'<polyline points="20 6 9 17 4 12"/>':'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';t.className='toast '+type;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
-  const SEND_SVG='<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
-  function setLoad(btn,on,txt){if(!btn)return;if(on){btn.classList.add('loading');btn.querySelector('svg').innerHTML='<circle cx="12" cy="12" r="9" stroke-dasharray="28" stroke-dashoffset="8" class="spinner"/>';btn.querySelector('span').textContent=txt||'Envoi...';}else{btn.classList.remove('loading');btn.querySelector('svg').innerHTML=SEND_SVG;btn.querySelector('span').textContent=txt;}}
+})();
 </script>
 </body>
 </html>
