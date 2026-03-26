@@ -432,11 +432,11 @@
   <span id="toast-msg"></span>
 </div>
 
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'></script>
 <script>
   // ── CONFIG ────────────────────────────────────────────────────
   const WEBHOOK_LUNETTES = 'https://yaniszedira.app.n8n.cloud/webhook/lunettes-arrivees';
   const WEBHOOK_SUIVI    = 'https://yaniszedira.app.n8n.cloud/webhook/suivi-client';
-  const ANTHROPIC_API    = 'https://api.anthropic.com/v1/messages';
   const PIN_HASH         = '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
 
   // ── PIN ───────────────────────────────────────────────────────
@@ -502,47 +502,55 @@
     ctx.drawImage(video, 0, 0);
 
     btn.classList.add('loading');
-    btn.querySelector('span').textContent = 'Analyse en cours...';
-
-    const imageData = canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+    btn.querySelector('span').textContent = 'Lecture en cours...';
 
     try {
-      const response = await fetch(ANTHROPIC_API, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 200,
-          messages: [{
-            role: 'user',
-            content: [
-              {
-                type: 'image',
-                source: { type: 'base64', media_type: 'image/jpeg', data: imageData }
-              },
-              {
-                type: 'text',
-                text: 'Cette image est une fiche client d\'un opticien. Extrais uniquement le nom complet du client et son numéro de téléphone. Réponds UNIQUEMENT en JSON sans aucun autre texte, format exact: {"nom":"PRENOM NOM","telephone":"0X XX XX XX XX"}. Si tu ne trouves pas une des informations, mets null.'
-              }
-            ]
-          }]
-        })
+      // Tesseract OCR — 100% gratuit, tourne dans le navigateur
+      const { data: { text } } = await Tesseract.recognize(canvas, 'fra', {
+        logger: () => {}
       });
-
-      const data = await response.json();
-      const text = data.content?.[0]?.text || '';
-      const clean = text.replace(/```json|```/g, '').trim();
-      const parsed = JSON.parse(clean);
 
       stopCamera();
 
-      if(parsed.nom && parsed.telephone) {
-        scannedName = parsed.nom;
-        scannedPhone = parsed.telephone;
-        document.getElementById('result-name').textContent = parsed.nom;
-        document.getElementById('result-phone').textContent = parsed.telephone;
+      // Extraction nom — cherche "M. NOM Prenom" ou "Mme NOM Prenom" ou "NOM Prenom" en majuscules
+      let nom = null, telephone = null;
+
+      // Pattern téléphone — cherche 10 chiffres groupés
+      const telMatch = text.match(/(?:Téléphone\s*:\s*)?(\+?33\s*[\d\s]{9,14}|0[67]\s*\d{2}\s*\d{2}\s*\d{2}\s*\d{2})/i);
+      if(telMatch) telephone = telMatch[1].replace(/\s+/g,'').replace(/^33/,'+33');
+
+      // Pattern nom — ligne avec "M." ou "Mme" ou majuscules
+      const nomMatch = text.match(/(?:M\.|Mme\.?|MME\.?)\s+([A-ZÉÈÊÀÂÎÏÔÙÛÜ][A-ZÉÈÊÀÂÎÏÔÙÛÜa-zéèêàâîïôùûü\s\-]+?)(?:
+|$)/);
+      if(nomMatch) nom = nomMatch[1].trim();
+
+      // Fallback — cherche une ligne en MAJUSCULES qui ressemble à un nom
+      if(!nom) {
+        const lines = text.split('
+').map(l => l.trim()).filter(l => l.length > 3);
+        for(const line of lines) {
+          if(/^[A-ZÉÈÊ][A-ZÉÈÊ\s\-]{3,}$/.test(line) && !line.match(/VISITE|TELEPHONE|EQUIPEMENT|LIVR|PAIEMENT|TIERS|DATE/i)) {
+            nom = line; break;
+          }
+        }
+      }
+
+      if(nom && telephone) {
+        scannedName = nom;
+        scannedPhone = telephone;
+        document.getElementById('result-name').textContent = nom;
+        document.getElementById('result-phone').textContent = telephone;
         document.getElementById('result-card').style.display = 'flex';
-        document.getElementById('result-error') && (document.getElementById('result-error').style.display = 'none');
+        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'none';
+        document.getElementById('confirm-send-btn').style.display = 'flex';
+      } else if(telephone) {
+        // On a le téléphone mais pas le nom — on affiche quand même
+        scannedPhone = telephone;
+        scannedName = nom || 'Client';
+        document.getElementById('result-name').textContent = nom || '— Non détecté';
+        document.getElementById('result-phone').textContent = telephone;
+        document.getElementById('result-card').style.display = 'flex';
+        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'none';
         document.getElementById('confirm-send-btn').style.display = 'flex';
       } else {
         scannedName = '';
@@ -557,7 +565,7 @@
 
     } catch(e) {
       stopCamera();
-      showToast('Erreur d\'analyse. Réessayez ou saisissez manuellement.', 'error');
+      showToast('Erreur de lecture. Réessayez ou saisissez manuellement.', 'error');
       document.getElementById('viewfinder-wrap').style.display = 'none';
       document.getElementById('scanner-home').style.display = 'block';
     }
