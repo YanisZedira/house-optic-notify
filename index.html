@@ -11,12 +11,13 @@
   --gold-dim:rgba(201,168,76,0.15); --muted:#8a8070; --surface:#fff;
   --shadow:0 8px 40px rgba(13,13,13,0.08); --shadow-sm:0 2px 12px rgba(13,13,13,0.06);
   --radius:16px; --radius-sm:10px; --green:#1a6b3c; --green-bg:#f0faf5;
+  --green-dim:rgba(26,107,60,0.12);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
-/* ── PIN ── */
+/* PIN */
 #pin-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;z-index:100;background:var(--paper);}
 .pin-wrapper{width:100%;max-width:400px;display:flex;flex-direction:column;gap:28px;}
 .pin-header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;}
@@ -40,7 +41,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .key:active{transform:scale(.93);background:var(--gold-dim);}
 .key-empty{background:transparent!important;border-color:transparent!important;cursor:default!important;}
 
-/* ── APP ── */
+/* APP */
 #app-screen{display:none;min-height:100vh;}
 .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--ink);display:flex;flex-direction:column;z-index:50;}
 .sb-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;gap:10px;}
@@ -55,11 +56,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .nav-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);}
 .nav-btn.active{background:rgba(201,168,76,.15);color:var(--gold);}
 .nav-btn.active svg{stroke:var(--gold);}
+.nav-badge{background:rgba(192,57,43,.8);color:#fff;border-radius:100px;font-size:10px;font-weight:600;padding:2px 7px;margin-left:auto;}
 .sb-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,.06);}
 .sb-badge{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--gold);line-height:1.5;}
 .main{margin-left:240px;min-height:100vh;padding:32px;position:relative;z-index:1;}
 
-/* ── PAGES ── */
+/* PAGES */
 .page{display:none;flex-direction:column;gap:24px;}
 .page.active{display:flex;animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -69,7 +71,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .card-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
 .card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
 
-/* ── FORMS ── */
+/* FORMS */
 .fields{display:flex;flex-direction:column;gap:14px;}
 .field{display:flex;flex-direction:column;gap:7px;}
 .field label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;}
@@ -80,93 +82,117 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .iw input::placeholder{color:#bbb;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 
-/* ── BUTTONS ── */
+/* BUTTONS */
 .btn{width:100%;padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;}
 .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
 .btn:hover::before{opacity:.15;}
 .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(13,13,13,.2);}
 .btn:active{transform:translateY(0);}
-.btn.loading{pointer-events:none;opacity:.7;}
+.btn:disabled{opacity:.6;pointer-events:none;}
 .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#a8832a);box-shadow:0 4px 20px rgba(201,168,76,.3);}
 .btn-outline{background:transparent;color:var(--ink);border:1.5px solid rgba(13,13,13,.15);}
 .btn-outline:hover::before{opacity:0;}
 .btn-outline:hover{border-color:var(--ink);background:rgba(13,13,13,.04);box-shadow:none;}
+.btn-green{background:var(--green);box-shadow:0 4px 20px rgba(26,107,60,.3);}
 .btn-sm{padding:10px 18px;width:auto;font-size:13px;}
 .mt{margin-top:16px;}
 
-/* ── SCANNER ── */
-.scan-hero{display:flex;flex-direction:column;align-items:center;gap:20px;padding:36px 24px;text-align:center;}
-.scan-icon{width:96px;height:96px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(13,13,13,.2);}
+/* SCANNER */
+.scan-hero{display:flex;flex-direction:column;align-items:center;gap:20px;padding:32px 24px;text-align:center;}
+.scan-icon{width:88px;height:88px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(13,13,13,.2);}
 .scan-icon::before,.scan-icon::after{content:'';position:absolute;border-radius:50%;border:1.5px solid var(--gold);animation:pulse 2s ease infinite;}
 .scan-icon::before{inset:-8px;opacity:.35;}
 .scan-icon::after{inset:-18px;opacity:.15;animation-delay:.6s;}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.scan-icon svg{width:42px;height:42px;stroke:var(--gold);fill:none;stroke-width:1.3;}
+.scan-icon svg{width:40px;height:40px;stroke:var(--gold);fill:none;stroke-width:1.3;}
 .scan-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);}
-.scan-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:320px;}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;}
-.step{background:var(--paper);border-radius:12px;padding:14px 10px;text-align:center;border:1px solid rgba(13,13,13,.05);}
-.step-n{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
-.step-t{font-size:11px;color:var(--muted);line-height:1.5;}
+.scan-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:340px;}
 
-/* viewfinder */
+/* VIEWFINDER */
 #vf-wrap{display:none;flex-direction:column;align-items:center;gap:16px;}
-.vf{width:100%;max-width:500px;position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3;}
+.vf-container{width:100%;max-width:540px;position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3;}
 #cam-video{width:100%;height:100%;object-fit:cover;}
 #cam-canvas{display:none;}
-.vf-ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.vf-frame{width:76%;height:56%;border:2px solid var(--gold);border-radius:8px;position:relative;box-shadow:0 0 0 9999px rgba(0,0,0,.45);}
-.vfc{position:absolute;width:18px;height:18px;border-color:var(--gold);border-style:solid;}
-.vfc.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:4px 0 0 0;}
-.vfc.tr{top:-2px;right:-2px;border-width:3px 3px 0 0;border-radius:0 4px 0 0;}
-.vfc.bl{bottom:-2px;left:-2px;border-width:0 0 3px 3px;border-radius:0 0 0 4px;}
-.vfc.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 4px 0;}
-.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanAnim 2s ease-in-out infinite;}
+.vf-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;}
+.vf-hint-top{position:absolute;top:12px;left:0;right:0;text-align:center;font-size:12px;color:rgba(255,255,255,.8);background:rgba(0,0,0,.45);padding:8px 16px;letter-spacing:.06em;}
+.vf-frame{width:76%;height:54%;border:2.5px solid var(--gold);border-radius:10px;position:relative;box-shadow:0 0 0 9999px rgba(0,0,0,.5);transition:border-color .4s,box-shadow .4s;}
+.vf-frame.detected{border-color:#4ade80;box-shadow:0 0 0 9999px rgba(0,0,0,.5),0 0 30px rgba(74,222,128,.4);}
+.vfc{position:absolute;width:20px;height:20px;border-color:inherit;border-style:solid;transition:border-color .4s;}
+.vfc.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:5px 0 0 0;}
+.vfc.tr{top:-2px;right:-2px;border-width:3px 3px 0 0;border-radius:0 5px 0 0;}
+.vfc.bl{bottom:-2px;left:-2px;border-width:0 0 3px 3px;border-radius:0 0 0 5px;}
+.vfc.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 5px 0;}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanAnim 2s ease-in-out infinite;transition:background .4s;}
+.vf-frame.detected .scan-line{background:linear-gradient(90deg,transparent,#4ade80,transparent);}
 @keyframes scanAnim{0%{top:8%}50%{top:88%}100%{top:8%}}
-.vf-hint{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,.65);letter-spacing:.08em;text-transform:uppercase;}
-.vf-btns{display:flex;gap:10px;width:100%;max-width:500px;}
+.vf-status{position:absolute;bottom:14px;left:0;right:0;text-align:center;font-size:12px;color:rgba(255,255,255,.75);letter-spacing:.08em;text-transform:uppercase;transition:color .4s;}
+.vf-status.ok{color:#4ade80;}
 
-/* résultat */
+/* Success flash overlay */
+.vf-success-flash{position:absolute;inset:0;background:rgba(74,222,128,.25);opacity:0;pointer-events:none;transition:opacity .3s;border-radius:16px;}
+.vf-success-flash.show{opacity:1;}
+
+/* RESULT */
 #scan-result{display:none;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;}
-.res-card{background:var(--green-bg);border:1.5px solid rgba(26,107,60,.2);border-radius:var(--radius);padding:22px 24px;display:flex;flex-direction:column;gap:14px;}
+.res-card{background:var(--green-bg);border:1.5px solid rgba(26,107,60,.2);border-radius:var(--radius);padding:22px 24px;display:flex;flex-direction:column;gap:16px;}
 .res-head{display:flex;align-items:center;gap:12px;}
 .res-check{width:38px;height:38px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .res-check svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.5;}
 .res-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--green);}
 .res-sub{font-size:12px;color:rgba(26,107,60,.6);}
-.res-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.res-f{background:#fff;border-radius:10px;padding:11px 14px;}
-.res-f.full{grid-column:1/-1;}
-.res-lbl{font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
-.res-val{font-size:15px;color:var(--ink);font-weight:500;}
-.res-err{background:#fdf0f0;border:1.5px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:18px 20px;font-size:13px;color:#c0392b;line-height:1.6;}
+.edit-fields{display:flex;flex-direction:column;gap:12px;}
+.edit-field{display:flex;flex-direction:column;gap:6px;}
+.edit-field label{font-size:10px;font-weight:500;color:rgba(26,107,60,.7);letter-spacing:.15em;text-transform:uppercase;}
+.edit-input{width:100%;padding:11px 14px;border:1.5px solid rgba(26,107,60,.2);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;color:var(--ink);background:#fff;outline:none;transition:all .2s;}
+.edit-input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-dim);}
+.res-err{background:#fdf0f0;border:1.5px solid rgba(192,57,43,.2);border-radius:var(--radius);padding:18px 20px;font-size:13px;color:#c0392b;line-height:1.7;}
 .res-btns{display:flex;gap:10px;}
 
-/* timeline */
+/* TIMELINE */
 .timeline{display:flex;flex-direction:column;}
-.tl-item{display:flex;gap:14px;padding:12px 0;position:relative;}
-.tl-item:not(:last-child)::after{content:'';position:absolute;left:16px;top:40px;bottom:-2px;width:1px;background:rgba(13,13,13,.08);}
-.tl-dot{width:32px;height:32px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
-.tl-dot svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+.tl-item{display:flex;gap:14px;padding:11px 0;position:relative;}
+.tl-item:not(:last-child)::after{content:'';position:absolute;left:15px;top:38px;bottom:-2px;width:1px;background:rgba(13,13,13,.08);}
+.tl-dot{width:30px;height:30px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.tl-dot svg{width:12px;height:12px;stroke:var(--gold);fill:none;stroke-width:1.5;}
 .tl-dot.now{background:var(--green);}
 .tl-dot.now svg{stroke:#fff;}
-.tl-info{flex:1;padding-top:5px;}
+.tl-info{flex:1;padding-top:4px;}
 .tl-when{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2px;}
 .tl-when.now{color:var(--green);}
-.tl-title{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:2px;}
-.tl-msg{font-size:12px;color:var(--muted);font-style:italic;line-height:1.5;}
+.tl-title{font-size:13px;color:var(--ink);font-weight:500;margin-bottom:1px;}
+.tl-msg{font-size:11px;color:var(--muted);font-style:italic;line-height:1.5;}
 
-/* historique */
+/* EN ATTENTE LIST */
+.attente-list{display:flex;flex-direction:column;gap:10px;}
+.attente-item{background:var(--surface);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px;border:1px solid rgba(13,13,13,.06);transition:all .2s;}
+.attente-item:hover{box-shadow:var(--shadow-sm);}
+.attente-av{width:40px;height:40px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold);flex-shrink:0;}
+.attente-info{flex:1;}
+.attente-name{font-size:14px;color:var(--ink);font-weight:500;}
+.attente-meta{font-size:12px;color:var(--muted);margin-top:2px;}
+.attente-days{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;flex-shrink:0;}
+.days-ok{background:rgba(26,107,60,.1);color:var(--green);}
+.days-warn{background:rgba(201,168,76,.15);color:#7a5a00;}
+.days-late{background:rgba(192,57,43,.1);color:#c0392b;}
+.btn-recupere{padding:8px 14px;background:var(--green);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.btn-recupere:hover{background:#155a32;}
+.btn-recupere svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-icon{width:48px;height:48px;border-radius:50%;background:rgba(13,13,13,.04);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.empty-icon svg{width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:1.5;}
+
+/* HISTORIQUE */
 .hist-list{display:flex;flex-direction:column;gap:8px;}
 .hist-item{background:var(--surface);border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;border:1px solid rgba(13,13,13,.05);}
 .hist-av{width:36px;height:36px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);flex-shrink:0;}
 .hist-info{flex:1;}
 .hist-name{font-size:14px;color:var(--ink);font-weight:500;}
 .hist-meta{font-size:12px;color:var(--muted);margin-top:1px;}
-.badge-ok{font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(26,107,60,.1);color:var(--green);font-weight:500;}
+.badge-ok{font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(26,107,60,.1);color:var(--green);font-weight:500;white-space:nowrap;}
+.badge-recup{font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(13,13,13,.06);color:var(--muted);font-weight:500;white-space:nowrap;}
 
-/* toast */
+/* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(13,13,13,.25);transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:999;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast.ok{background:#1a3a2a;}
@@ -180,9 +206,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .sb-brand,.sb-sub,.nav-lbl,.nav-btn span,.sb-badge{display:none;}
   .nav-btn{justify-content:center;padding:12px;}
   .main{margin-left:60px;padding:20px;}
-  .steps{grid-template-columns:1fr;}
-  .res-grid{grid-template-columns:1fr;}
   .g2{grid-template-columns:1fr;}
+  .res-btns{flex-direction:column;}
 }
 @media(max-width:600px){
   .sidebar{display:none;}
@@ -206,25 +231,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="pin-card-title">Accès équipe</div>
       <p class="pin-card-desc">Entrez votre code PIN pour accéder à l'interface.</p>
       <div class="pin-dots">
-        <div class="pin-dot" id="d0"></div>
-        <div class="pin-dot" id="d1"></div>
-        <div class="pin-dot" id="d2"></div>
-        <div class="pin-dot" id="d3"></div>
+        <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+        <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
       </div>
       <div class="pin-error" id="pin-err"></div>
       <div class="keypad">
-        <button class="key" id="k1">1</button>
-        <button class="key" id="k2">2</button>
-        <button class="key" id="k3">3</button>
-        <button class="key" id="k4">4</button>
-        <button class="key" id="k5">5</button>
-        <button class="key" id="k6">6</button>
-        <button class="key" id="k7">7</button>
-        <button class="key" id="k8">8</button>
-        <button class="key" id="k9">9</button>
-        <button class="key key-empty"></button>
-        <button class="key" id="k0">0</button>
-        <button class="key" id="kdel">⌫</button>
+        <button class="key" id="k1">1</button><button class="key" id="k2">2</button><button class="key" id="k3">3</button>
+        <button class="key" id="k4">4</button><button class="key" id="k5">5</button><button class="key" id="k6">6</button>
+        <button class="key" id="k7">7</button><button class="key" id="k8">8</button><button class="key" id="k9">9</button>
+        <button class="key key-empty"></button><button class="key" id="k0">0</button><button class="key" id="kdel">⌫</button>
       </div>
     </div>
   </div>
@@ -242,15 +257,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="nav-lbl">Navigation</div>
       <button class="nav-btn active" id="nav-scanner">
         <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
-        <span>Scanner une fiche</span>
+        <span>Scanner</span>
+      </button>
+      <button class="nav-btn" id="nav-attente">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>En attente</span>
+        <span class="nav-badge" id="badge-attente" style="display:none;">0</span>
+      </button>
+      <button class="nav-btn" id="nav-historique">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>Historique</span>
       </button>
       <button class="nav-btn" id="nav-manuel">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Saisie manuelle</span>
-      </button>
-      <button class="nav-btn" id="nav-historique">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span>Historique</span>
       </button>
     </div>
     <div class="sb-footer">
@@ -264,10 +284,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="page active" id="page-scanner">
       <div>
         <div class="page-title">Scanner une fiche</div>
-        <div class="page-sub">Pointez la caméra sur le code-barres pour tout déclencher automatiquement</div>
+        <div class="page-sub">La caméra détecte automatiquement le nom et le téléphone</div>
       </div>
 
-      <!-- Accueil scanner -->
       <div id="scan-home">
         <div class="card">
           <div class="scan-hero">
@@ -275,47 +294,37 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
               <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
             </div>
             <div>
-              <div class="scan-title">Prêt à scanner</div>
-              <p class="scan-desc">Positionnez la fiche client devant la caméra. Le nom et le téléphone sont extraits automatiquement.</p>
+              <div class="scan-title">Scan automatique</div>
+              <p class="scan-desc">Cadrez la zone <strong>nom + téléphone</strong> de la fiche dans le rectangle. La validation se fait automatiquement.</p>
             </div>
           </div>
-          <div class="steps">
-            <div class="step"><div class="step-n">1</div><div class="step-t">Appuyez sur Scanner</div></div>
-            <div class="step"><div class="step-n">2</div><div class="step-t">Pointez sur le code-barres</div></div>
-            <div class="step"><div class="step-n">3</div><div class="step-t">Confirmez et envoyez</div></div>
+          <div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:13px;color:var(--muted);line-height:1.7;">
+            💡 <strong style="color:var(--ink);">Conseil :</strong> Encadrez bien la partie <strong>prénom, nom et numéro de téléphone</strong> — pas uniquement le code-barres. Éclairage suffisant pour une lecture optimale.
           </div>
-          <button class="btn btn-gold mt" id="btn-start-scanner">
+          <button class="btn btn-gold" id="btn-start-scanner">
             <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
-            <span>Scanner la fiche</span>
+            <span>Lancer le scan</span>
           </button>
         </div>
         <div class="card">
-          <div class="card-title">Ce qui se déclenche automatiquement</div>
-          <p class="card-desc">Un seul scan, trois actions automatiques.</p>
+          <div class="card-title">Ce qui se déclenche après validation</div>
+          <p class="card-desc">Un seul scan, tout est automatique.</p>
           <div class="timeline">
             <div class="tl-item">
               <div class="tl-dot now"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
-              <div class="tl-info">
-                <div class="tl-when now">Immédiat</div>
-                <div class="tl-title">SMS — Lunettes arrivées</div>
-                <div class="tl-msg">"Bonjour [Prénom], votre équipement est prêt ! Venez le récupérer chez House Optic…"</div>
-              </div>
+              <div class="tl-info"><div class="tl-when now">Immédiat</div><div class="tl-title">SMS — Lunettes prêtes</div><div class="tl-msg">"Bonjour [Prénom], votre équipement est prêt…"</div></div>
             </div>
             <div class="tl-item">
               <div class="tl-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-              <div class="tl-info">
-                <div class="tl-when">J + 7</div>
-                <div class="tl-title">SMS — Satisfaction & avis Google</div>
-                <div class="tl-msg">"Tout s'est bien passé ? Laissez-nous un avis, ça nous aide beaucoup…"</div>
-              </div>
+              <div class="tl-info"><div class="tl-when">J + 7 après récupération</div><div class="tl-title">SMS — Satisfaction & avis Google</div><div class="tl-msg">"Tout s'est bien passé ? Laissez-nous un avis…"</div></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg></div>
+              <div class="tl-info"><div class="tl-when">J + 14 si pas récupéré</div><div class="tl-title">SMS — Rappel doux</div><div class="tl-msg">"Vos lunettes vous attendent toujours chez House Optic…"</div></div>
             </div>
             <div class="tl-item">
               <div class="tl-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-              <div class="tl-info">
-                <div class="tl-when">J + 365</div>
-                <div class="tl-title">SMS — Réactivation client</div>
-                <div class="tl-msg">"Cela fait un an que nous vous avons accueilli. Nos nouvelles collections sont arrivées…"</div>
-              </div>
+              <div class="tl-info"><div class="tl-when">J + 365</div><div class="tl-title">SMS — Réactivation client</div><div class="tl-msg">"Cela fait un an… nos nouvelles collections sont arrivées !"</div></div>
             </div>
           </div>
         </div>
@@ -323,23 +332,25 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
       <!-- Viewfinder -->
       <div id="vf-wrap">
-        <div class="card" style="width:100%;max-width:540px;padding:20px;">
-          <div class="vf">
+        <div class="card" style="width:100%;max-width:560px;padding:18px;">
+          <div class="vf-container" id="vf-container">
             <video id="cam-video" autoplay playsinline muted></video>
             <canvas id="cam-canvas"></canvas>
-            <div class="vf-ov">
-              <div class="vf-frame">
+            <div class="vf-success-flash" id="vf-flash"></div>
+            <div class="vf-overlay">
+              <div class="vf-hint-top" id="vf-hint">📋 Cadrez le prénom, nom et téléphone dans le rectangle</div>
+              <div class="vf-frame" id="vf-frame">
                 <div class="vfc tl"></div><div class="vfc tr"></div>
                 <div class="vfc bl"></div><div class="vfc br"></div>
                 <div class="scan-line"></div>
               </div>
+              <div class="vf-status" id="vf-status">Analyse en cours...</div>
             </div>
-            <div class="vf-hint">Alignez la fiche dans le cadre</div>
           </div>
-          <div class="vf-btns" style="margin-top:14px;">
+          <div style="display:flex;gap:10px;margin-top:14px;">
             <button class="btn btn-gold" id="btn-capture" style="flex:1;">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M20.94 11A9 9 0 1 1 12 3"/></svg>
-              <span>Analyser la fiche</span>
+              <span>Analyser maintenant</span>
             </button>
             <button class="btn btn-outline" id="btn-cancel-scan" style="width:auto;padding:15px 18px;">
               <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -349,35 +360,70 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         </div>
       </div>
 
-      <!-- Résultat -->
+      <!-- Résultat avec champs éditables -->
       <div id="scan-result">
-        <div class="card" style="max-width:540px;">
+        <div class="card" style="max-width:560px;">
           <div id="res-ok" class="res-card">
             <div class="res-head">
               <div class="res-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
               <div>
                 <div class="res-title">Fiche lue avec succès</div>
-                <div class="res-sub">Vérifiez les informations avant d'envoyer</div>
+                <div class="res-sub">Vérifiez et corrigez si besoin avant d'envoyer</div>
               </div>
             </div>
-            <div class="res-grid">
-              <div class="res-f full"><div class="res-lbl">Nom du client</div><div class="res-val" id="res-name">—</div></div>
-              <div class="res-f full"><div class="res-lbl">Téléphone</div><div class="res-val" id="res-phone">—</div></div>
+            <div class="edit-fields">
+              <div class="edit-field">
+                <label>Nom du client</label>
+                <input type="text" class="edit-input" id="edit-name" placeholder="Prénom Nom">
+              </div>
+              <div class="edit-field">
+                <label>Téléphone</label>
+                <input type="tel" class="edit-input" id="edit-phone" placeholder="06 12 34 56 78">
+              </div>
             </div>
           </div>
           <div id="res-err" class="res-err" style="display:none;">
-            Impossible de lire la fiche. Vérifiez l'éclairage et réessayez, ou utilisez la saisie manuelle.
+            ⚠️ Impossible de lire la fiche automatiquement. Vérifiez l'éclairage, rapprochez la caméra, ou modifiez les champs manuellement ci-dessus.
           </div>
           <div class="res-btns" style="margin-top:14px;">
-            <button class="btn btn-gold" id="btn-confirm-send" style="flex:1;">
+            <button class="btn btn-green" id="btn-confirm-send" style="flex:1;">
               <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              <span>Confirmer et envoyer</span>
+              <span>Valider et envoyer</span>
             </button>
             <button class="btn btn-outline" id="btn-rescan" style="width:auto;padding:15px 18px;">
               <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
               <span>Rescanner</span>
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE EN ATTENTE -->
+    <div class="page" id="page-attente">
+      <div>
+        <div class="page-title">En attente de récupération</div>
+        <div class="page-sub">Appuyez sur "Récupéré" quand le client vient chercher ses lunettes</div>
+      </div>
+      <div class="card">
+        <div class="attente-list" id="attente-list">
+          <div class="empty-state">
+            <div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <p style="font-size:13px;">Aucune lunette en attente.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE HISTORIQUE -->
+    <div class="page" id="page-historique">
+      <div>
+        <div class="page-title">Historique</div>
+        <div class="page-sub">Tous les envois effectués</div>
+      </div>
+      <div class="card">
+        <div class="hist-list" id="hist-list">
+          <p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l'instant.</p>
         </div>
       </div>
     </div>
@@ -390,7 +436,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
       <div class="card" style="max-width:520px;">
         <div class="card-title">Déclencher les envois</div>
-        <p class="card-desc">SMS immédiat + J+7 + J+365 automatiquement.</p>
+        <p class="card-desc">SMS immédiat + suivi automatique complet.</p>
         <div class="fields">
           <div class="g2">
             <div class="field">
@@ -416,24 +462,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
     </div>
 
-    <!-- PAGE HISTORIQUE -->
-    <div class="page" id="page-historique">
-      <div>
-        <div class="page-title">Historique</div>
-        <div class="page-sub">Fiches scannées et SMS envoyés</div>
-      </div>
-      <div class="card">
-        <div class="card-title">Envois récents</div>
-        <div class="hist-list" id="hist-list">
-          <p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l'instant.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast">
   <svg id="toast-ico" viewBox="0 0 24 24"></svg>
   <span id="toast-msg"></span>
@@ -443,18 +474,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 (function() {
   'use strict';
 
-  // ── WEBHOOKS ──────────────────────────────────────────────────
   var WH_LUNETTES = 'https://yaniszedira.app.n8n.cloud/webhook/lunettes-arrivees';
   var WH_SUIVI    = 'https://yaniszedira.app.n8n.cloud/webhook/suivi-client';
+  var WH_RAPPEL   = 'https://yaniszedira.app.n8n.cloud/webhook/rappel-j14';
   var PIN_HASH    = '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
 
-  // ── STATE ─────────────────────────────────────────────────────
-  var pinInput   = '';
-  var camStream  = null;
-  var scanName   = '';
-  var scanPhone  = '';
+  var pinInput  = '';
+  var camStream = null;
+  var autoTimer = null;
 
-  // ── UTILS ─────────────────────────────────────────────────────
+  // ── UTILS ──────────────────────────────────────────────────────
   function fmtPhone(r) {
     var d = r.replace(/[\s.\-]/g, '');
     if (d.startsWith('+33')) return d;
@@ -463,11 +492,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     return '+33' + d;
   }
 
+  function fmtPhoneDisplay(r) {
+    var d = r.replace(/\D/g, '');
+    if (d.startsWith('33')) d = '0' + d.slice(2);
+    // Format: 06 12 34 56 78
+    return d.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+  }
+
   function showToast(msg, type) {
     var t = document.getElementById('toast');
-    var ico = document.getElementById('toast-ico');
     document.getElementById('toast-msg').textContent = msg;
-    ico.innerHTML = (type === 'ok')
+    document.getElementById('toast-ico').innerHTML = type === 'ok'
       ? '<polyline points="20 6 9 17 4 12"/>'
       : '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';
     t.className = 'toast ' + (type || 'ok');
@@ -489,7 +524,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     }
   }
 
-  // ── PIN ───────────────────────────────────────────────────────
+  // ── PIN ────────────────────────────────────────────────────────
   async function hashPin(p) {
     var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p));
     return Array.from(new Uint8Array(buf)).map(function(x) { return x.toString(16).padStart(2,'0'); }).join('');
@@ -512,7 +547,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       if (h === PIN_HASH) {
         document.getElementById('pin-screen').style.display = 'none';
         document.getElementById('app-screen').style.display = 'block';
+        renderAttente();
         renderHistory();
+        updateAttenteCount();
+        checkJ14();
       } else {
         for (var i = 0; i < 4; i++) {
           var dot = document.getElementById('d' + i);
@@ -520,34 +558,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           dot.classList.add('error');
         }
         document.getElementById('pin-err').textContent = 'Code incorrect, réessayez.';
-        setTimeout(function() {
-          pinInput = '';
-          updateDots();
-          document.getElementById('pin-err').textContent = '';
-        }, 1200);
+        setTimeout(function() { pinInput = ''; updateDots(); document.getElementById('pin-err').textContent = ''; }, 1200);
       }
     }
   }
 
-  function handleDel() {
-    pinInput = pinInput.slice(0, -1);
-    updateDots();
-    document.getElementById('pin-err').textContent = '';
-  }
+  function handleDel() { pinInput = pinInput.slice(0,-1); updateDots(); document.getElementById('pin-err').textContent = ''; }
 
-  // Attach keypad buttons
   ['1','2','3','4','5','6','7','8','9','0'].forEach(function(n) {
-    document.getElementById('k' + n).addEventListener('click', function() { handleKey(n); });
+    document.getElementById('k'+n).addEventListener('click', function() { handleKey(n); });
   });
   document.getElementById('kdel').addEventListener('click', handleDel);
-
   document.addEventListener('keydown', function(e) {
     if (document.getElementById('pin-screen').style.display === 'none') return;
     if (e.key >= '0' && e.key <= '9') handleKey(e.key);
     if (e.key === 'Backspace') handleDel();
   });
 
-  // ── NAVIGATION ────────────────────────────────────────────────
+  // ── NAVIGATION ─────────────────────────────────────────────────
   function showPage(pageId, navId) {
     document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
     document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -555,20 +583,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     document.getElementById(navId).classList.add('active');
   }
 
-  document.getElementById('nav-scanner').addEventListener('click', function() {
-    showPage('page-scanner', 'nav-scanner');
-  });
-  document.getElementById('nav-manuel').addEventListener('click', function() {
-    showPage('page-manuel', 'nav-manuel');
-  });
-  document.getElementById('nav-historique').addEventListener('click', function() {
-    showPage('page-historique', 'nav-historique');
-    renderHistory();
-  });
+  document.getElementById('nav-scanner').addEventListener('click', function() { showPage('page-scanner','nav-scanner'); });
+  document.getElementById('nav-attente').addEventListener('click', function() { showPage('page-attente','nav-attente'); renderAttente(); });
+  document.getElementById('nav-historique').addEventListener('click', function() { showPage('page-historique','nav-historique'); renderHistory(); });
+  document.getElementById('nav-manuel').addEventListener('click', function() { showPage('page-manuel','nav-manuel'); });
 
-  // ── SCANNER ───────────────────────────────────────────────────
+  // ── SCANNER AUTO ───────────────────────────────────────────────
   document.getElementById('btn-start-scanner').addEventListener('click', startScanner);
-  document.getElementById('btn-capture').addEventListener('click', capturePhoto);
+  document.getElementById('btn-capture').addEventListener('click', function() { captureAndAnalyze(false); });
   document.getElementById('btn-cancel-scan').addEventListener('click', cancelScanner);
   document.getElementById('btn-confirm-send').addEventListener('click', confirmSend);
   document.getElementById('btn-rescan').addEventListener('click', rescan);
@@ -576,7 +598,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   async function startScanner() {
     var btn = document.getElementById('btn-start-scanner');
     btn.disabled = true;
-    btn.querySelector('span').textContent = 'Activation caméra...';
+    btn.querySelector('span').textContent = 'Activation...';
     try {
       camStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }
@@ -585,26 +607,34 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       document.getElementById('scan-home').style.display = 'none';
       document.getElementById('scan-result').style.display = 'none';
       document.getElementById('vf-wrap').style.display = 'flex';
+
+      // Auto-analyse toutes les 3 secondes
+      autoTimer = setInterval(function() { captureAndAnalyze(true); }, 3000);
+
     } catch(e) {
       showToast('Caméra non disponible. Utilisez la saisie manuelle.', 'err');
     }
     btn.disabled = false;
-    btn.querySelector('span').textContent = 'Scanner la fiche';
+    btn.querySelector('span').textContent = 'Lancer le scan';
   }
 
-  async function capturePhoto() {
-    var btn = document.getElementById('btn-capture');
+  async function captureAndAnalyze(isAuto) {
     var video = document.getElementById('cam-video');
     var canvas = document.getElementById('cam-canvas');
+    if (!video.videoWidth) return;
+
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     canvas.getContext('2d').drawImage(video, 0, 0);
 
-    btn.disabled = true;
-    btn.querySelector('span').textContent = 'Lecture en cours...';
+    if (!isAuto) {
+      var btn = document.getElementById('btn-capture');
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Lecture...';
+    }
 
     try {
-      var blob = await new Promise(function(res) { canvas.toBlob(res, 'image/jpeg', 0.92); });
+      var blob = await new Promise(function(res) { canvas.toBlob(res, 'image/jpeg', 0.9); });
       var fd = new FormData();
       fd.append('file', blob, 'fiche.jpg');
       fd.append('language', 'fre');
@@ -618,99 +648,266 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       var data = await resp.json();
       var text = (data.ParsedResults && data.ParsedResults[0]) ? data.ParsedResults[0].ParsedText : '';
 
-      stopCamera();
-
       var nom = null, tel = null;
-
-      // Extraire téléphone
       var telM = text.match(/(0[6-9][\s.]?\d{2}[\s.]?\d{2}[\s.]?\d{2}[\s.]?\d{2})/);
       if (telM) tel = telM[1].replace(/[\s.]/g, '');
-
-      // Extraire nom — ligne "M. NOM Prenom"
       var nomM = text.match(/(?:M\.|Mme\.?)\s+([A-Z][A-Za-z\u00C0-\u017E\s\-]{2,30})/);
       if (nomM) nom = nomM[1].trim();
-
-      // Fallback — ligne en MAJUSCULES
       if (!nom) {
-        var lines = text.split(/\r?\n/).map(function(l) { return l.trim(); }).filter(function(l) { return l.length > 3; });
-        for (var i = 0; i < lines.length; i++) {
-          var line = lines[i];
-          if (/^[A-Z\u00C0-\u00DC]{2,}(\s+[A-Za-z\u00C0-\u017E]+)+$/.test(line) &&
-              !/(VISITE|TELEPHONE|EQUIPEMENT|LIVR|PAIEMENT|TIERS|DATE|LENTILLE|OBSERVATION|HOUSE|OPTIC)/i.test(line)) {
-            nom = line; break;
+        var lines = text.split(/\r?\n/).map(function(l){return l.trim();}).filter(function(l){return l.length>3;});
+        for (var i=0; i<lines.length; i++) {
+          if (/^[A-Z\u00C0-\u00DC]{2,}(\s+[A-Za-z\u00C0-\u017E]+)+$/.test(lines[i]) &&
+              !/(VISITE|TELEPHONE|EQUIPEMENT|LIVR|PAIEMENT|TIERS|DATE|LENTILLE|OBSERVATION|HOUSE|OPTIC)/i.test(lines[i])) {
+            nom = lines[i]; break;
           }
         }
       }
 
-      stopCamera();
-      document.getElementById('vf-wrap').style.display = 'none';
+      if (isAuto && tel && nom) {
+        // Détection automatique — animation verte puis résultat
+        clearInterval(autoTimer);
+        autoTimer = null;
+        var frame = document.getElementById('vf-frame');
+        var flash = document.getElementById('vf-flash');
+        var status = document.getElementById('vf-status');
+        frame.classList.add('detected');
+        flash.classList.add('show');
+        status.textContent = '✓ Informations détectées !';
+        status.classList.add('ok');
+        document.getElementById('vf-hint').textContent = '✓ Lecture réussie';
 
-      if (tel || nom) {
-        scanName = nom || 'Client';
-        scanPhone = tel || '';
-        document.getElementById('res-name').textContent = nom || '— Non détecté';
-        document.getElementById('res-phone').textContent = tel || '— Non détecté';
-        document.getElementById('res-ok').style.display = 'flex';
-        document.getElementById('res-err').style.display = 'none';
-        document.getElementById('btn-confirm-send').style.display = 'flex';
-      } else {
-        document.getElementById('res-ok').style.display = 'none';
-        document.getElementById('res-err').style.display = 'block';
-        document.getElementById('btn-confirm-send').style.display = 'none';
+        setTimeout(function() {
+          flash.classList.remove('show');
+          stopCamera();
+          showResult(nom, tel, true);
+        }, 900);
+
+      } else if (!isAuto) {
+        stopCamera();
+        showResult(nom, tel, !!(nom || tel));
       }
-      document.getElementById('scan-result').style.display = 'block';
 
     } catch(e) {
-      stopCamera();
-      document.getElementById('vf-wrap').style.display = 'none';
-      document.getElementById('scan-home').style.display = 'block';
-      showToast('Erreur réseau. Réessayez ou saisie manuelle.', 'err');
+      if (!isAuto) {
+        stopCamera();
+        showResult(null, null, false);
+      }
     }
 
-    btn.disabled = false;
-    btn.querySelector('span').textContent = 'Analyser la fiche';
+    if (!isAuto) {
+      var captureBtn = document.getElementById('btn-capture');
+      captureBtn.disabled = false;
+      captureBtn.querySelector('span').textContent = 'Analyser maintenant';
+    }
   }
 
+  function showResult(nom, tel, success) {
+    document.getElementById('vf-wrap').style.display = 'none';
+
+    var editName = document.getElementById('edit-name');
+    var editPhone = document.getElementById('edit-phone');
+
+    if (success && (nom || tel)) {
+      editName.value = nom || '';
+      editPhone.value = tel ? fmtPhoneDisplay(tel) : '';
+      document.getElementById('res-ok').style.display = 'flex';
+      document.getElementById('res-err').style.display = 'none';
+    } else {
+      editName.value = '';
+      editPhone.value = '';
+      document.getElementById('res-ok').style.display = 'none';
+      document.getElementById('res-err').style.display = 'block';
+    }
+    document.getElementById('scan-result').style.display = 'block';
+  }
+
+  // Format phone as user types
+  document.getElementById('edit-phone').addEventListener('input', function() {
+    var digits = this.value.replace(/\D/g,'');
+    if (digits.length > 0) this.value = fmtPhoneDisplay(digits);
+  });
+
   function stopCamera() {
-    if (camStream) { camStream.getTracks().forEach(function(t) { t.stop(); }); camStream = null; }
+    if (camStream) { camStream.getTracks().forEach(function(t){t.stop();}); camStream = null; }
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
   }
 
   function cancelScanner() {
     stopCamera();
+    var frame = document.getElementById('vf-frame');
+    frame.classList.remove('detected');
+    document.getElementById('vf-status').textContent = 'Analyse en cours...';
+    document.getElementById('vf-status').classList.remove('ok');
+    document.getElementById('vf-hint').textContent = '📋 Cadrez le prénom, nom et téléphone dans le rectangle';
     document.getElementById('vf-wrap').style.display = 'none';
     document.getElementById('scan-home').style.display = 'block';
   }
 
   function rescan() {
+    var frame = document.getElementById('vf-frame');
+    frame.classList.remove('detected');
+    document.getElementById('vf-status').textContent = 'Analyse en cours...';
+    document.getElementById('vf-status').classList.remove('ok');
+    document.getElementById('vf-hint').textContent = '📋 Cadrez le prénom, nom et téléphone dans le rectangle';
     document.getElementById('scan-result').style.display = 'none';
     document.getElementById('scan-home').style.display = 'block';
-    scanName = ''; scanPhone = '';
   }
 
   async function confirmSend() {
-    if (!scanPhone) { showToast('Numéro de téléphone manquant.', 'err'); return; }
+    var name  = document.getElementById('edit-name').value.trim();
+    var phone = document.getElementById('edit-phone').value.trim();
+    if (!name) { showToast('Entrez le nom du client.', 'err'); return; }
+    if (!phone) { showToast('Entrez le numéro de téléphone.', 'err'); return; }
     var btn = document.getElementById('btn-confirm-send');
     setBtnLoad(btn, true);
-    await triggerFlow(scanName, scanPhone);
-    setBtnLoad(btn, false, 'Confirmer et envoyer');
+    await triggerFlow(name, phone);
+    setBtnLoad(btn, false, 'Valider et envoyer');
     rescan();
   }
 
-  // ── SMS FLOW ──────────────────────────────────────────────────
+  // ── SMS FLOW ────────────────────────────────────────────────────
   async function triggerFlow(name, phone) {
     var p = fmtPhone(phone);
     var today = new Date().toISOString().split('T')[0];
     try {
       await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p));
-      await fetch(WH_SUIVI    + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p) + '&date=' + encodeURIComponent(today));
-      showToast('SMS envoyé à ' + name + ' · J+7 & J+365 programmés ✓', 'ok');
-      saveHistory(name, phone);
+      showToast('SMS envoyé à ' + name + ' ✓', 'ok');
+      saveAttente(name, p, today);
+      saveHistory(name, p, 'SMS envoyé');
+      updateAttenteCount();
     } catch(e) {
       showToast('Erreur réseau. Réessayez.', 'err');
     }
   }
 
-  // ── MANUEL ────────────────────────────────────────────────────
+  // ── ATTENTE / RÉCUPÉRÉ ─────────────────────────────────────────
+  function getAttente() { return JSON.parse(localStorage.getItem('ho_attente') || '[]'); }
+  function setAttente(data) { localStorage.setItem('ho_attente', JSON.stringify(data)); }
+
+  function saveAttente(name, phone, date) {
+    var list = getAttente();
+    list.unshift({ id: Date.now(), name: name, phone: phone, date: date, status: 'EN_ATTENTE' });
+    setAttente(list);
+  }
+
+  function daysSince(dateStr) {
+    var then = new Date(dateStr);
+    var now = new Date();
+    return Math.floor((now - then) / 86400000);
+  }
+
+  function renderAttente() {
+    var list = document.getElementById('attente-list');
+    var data = getAttente().filter(function(x) { return x.status === 'EN_ATTENTE'; });
+
+    if (!data.length) {
+      list.innerHTML = '<div class="empty-state"><div class="empty-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><p style="font-size:13px;">Aucune lunette en attente. Tout est récupéré !</p></div>';
+      return;
+    }
+
+    list.innerHTML = data.map(function(item) {
+      var days = daysSince(item.date);
+      var dayClass = days <= 5 ? 'days-ok' : days <= 13 ? 'days-warn' : 'days-late';
+      var dayLabel = days === 0 ? 'Aujourd\'hui' : days === 1 ? '1 jour' : days + ' jours';
+      return '<div class="attente-item" id="att-' + item.id + '">' +
+        '<div class="attente-av">' + item.name.charAt(0).toUpperCase() + '</div>' +
+        '<div class="attente-info">' +
+          '<div class="attente-name">' + item.name + '</div>' +
+          '<div class="attente-meta">' + item.phone + ' · Scanné le ' + new Date(item.date).toLocaleDateString('fr-FR') + '</div>' +
+        '</div>' +
+        '<span class="attente-days ' + dayClass + '">' + dayLabel + '</span>' +
+        '<button class="btn-recupere" data-id="' + item.id + '" data-name="' + item.name + '" data-phone="' + item.phone + '">' +
+          '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>' +
+          'Récupéré' +
+        '</button>' +
+      '</div>';
+    }).join('');
+
+    // Attach récupéré buttons
+    list.querySelectorAll('.btn-recupere').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        marquerRecupere(this.dataset.id, this.dataset.name, this.dataset.phone);
+      });
+    });
+  }
+
+  async function marquerRecupere(id, name, phone) {
+    var list = getAttente();
+    var item = list.find(function(x) { return x.id == id; });
+    if (!item) return;
+    item.status = 'RÉCUPÉRÉ';
+    item.dateRecup = new Date().toISOString().split('T')[0];
+    setAttente(list);
+    renderAttente();
+    updateAttenteCount();
+    saveHistory(name, phone, 'Récupéré ✓');
+
+    // Déclencher J+7
+    var today = new Date().toISOString().split('T')[0];
+    try {
+      await fetch(WH_SUIVI + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(fmtPhone(phone)) + '&date=' + encodeURIComponent(today));
+      showToast(name + ' a récupéré · Suivi J+7 programmé ✓', 'ok');
+    } catch(e) {
+      showToast(name + ' marqué récupéré.', 'ok');
+    }
+  }
+
+  function updateAttenteCount() {
+    var count = getAttente().filter(function(x) { return x.status === 'EN_ATTENTE'; }).length;
+    var badge = document.getElementById('badge-attente');
+    if (count > 0) {
+      badge.textContent = count;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+
+  // ── J+14 CHECK ──────────────────────────────────────────────────
+  function checkJ14() {
+    var list = getAttente();
+    list.forEach(function(item) {
+      if (item.status === 'EN_ATTENTE' && daysSince(item.date) >= 14 && !item.j14sent) {
+        item.j14sent = true;
+        fetch(WH_RAPPEL + '?name=' + encodeURIComponent(item.name) + '&phone=' + encodeURIComponent(fmtPhone(item.phone)));
+      }
+    });
+    setAttente(list);
+  }
+
+  // ── HISTORIQUE ──────────────────────────────────────────────────
+  function saveHistory(name, phone, action) {
+    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
+    hist.unshift({
+      name: name, phone: phone, action: action,
+      date: new Date().toLocaleDateString('fr-FR'),
+      time: new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })
+    });
+    if (hist.length > 100) hist.pop();
+    localStorage.setItem('ho_hist', JSON.stringify(hist));
+  }
+
+  function renderHistory() {
+    var list = document.getElementById('hist-list');
+    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
+    if (!hist.length) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l\'instant.</p>';
+      return;
+    }
+    list.innerHTML = hist.map(function(h) {
+      var isRecup = h.action && h.action.includes('Récupéré');
+      return '<div class="hist-item">' +
+        '<div class="hist-av">' + h.name.charAt(0).toUpperCase() + '</div>' +
+        '<div class="hist-info">' +
+          '<div class="hist-name">' + h.name + '</div>' +
+          '<div class="hist-meta">' + h.phone + ' · ' + h.date + ' à ' + h.time + '</div>' +
+        '</div>' +
+        '<span class="' + (isRecup ? 'badge-recup' : 'badge-ok') + '">' + (h.action || 'Envoyé ✓') + '</span>' +
+      '</div>';
+    }).join('');
+  }
+
+  // ── MANUEL ──────────────────────────────────────────────────────
   document.getElementById('btn-manuel').addEventListener('click', async function() {
     var btn = this;
     var name  = document.getElementById('m-name').value.trim();
@@ -722,37 +919,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     document.getElementById('m-name').value = '';
     document.getElementById('m-phone').value = '';
   });
-
-  // ── HISTORIQUE ────────────────────────────────────────────────
-  function saveHistory(name, phone) {
-    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
-    hist.unshift({
-      name: name, phone: phone,
-      date: new Date().toLocaleDateString('fr-FR'),
-      time: new Date().toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' })
-    });
-    if (hist.length > 50) hist.pop();
-    localStorage.setItem('ho_hist', JSON.stringify(hist));
-    renderHistory();
-  }
-
-  function renderHistory() {
-    var list = document.getElementById('hist-list');
-    if (!list) return;
-    var hist = JSON.parse(localStorage.getItem('ho_hist') || '[]');
-    if (!hist.length) {
-      list.innerHTML = '<p style="font-size:13px;color:var(--muted);text-align:center;padding:24px 0;">Aucun envoi pour l\'instant.</p>';
-      return;
-    }
-    list.innerHTML = hist.map(function(h) {
-      return '<div class="hist-item">' +
-        '<div class="hist-av">' + h.name.charAt(0).toUpperCase() + '</div>' +
-        '<div class="hist-info"><div class="hist-name">' + h.name + '</div>' +
-        '<div class="hist-meta">' + h.phone + ' · ' + h.date + ' à ' + h.time + '</div></div>' +
-        '<span class="badge-ok">Envoyé ✓</span>' +
-      '</div>';
-    }).join('');
-  }
 
 })();
 </script>
