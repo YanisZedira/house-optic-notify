@@ -7,173 +7,185 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0d0d0d;
-    --paper: #f7f4ef;
-    --gold: #c9a84c;
-    --gold-light: #e8d5a3;
-    --gold-dim: rgba(201,168,76,0.15);
-    --muted: #8a8070;
-    --surface: #ffffff;
-    --shadow: 0 8px 40px rgba(13,13,13,0.08);
-    --shadow-sm: 0 2px 12px rgba(13,13,13,0.06);
-    --radius: 16px;
-    --radius-sm: 10px;
+    --ink:#0d0d0d; --paper:#f7f4ef; --gold:#c9a84c; --gold-light:#e8d5a3;
+    --gold-dim:rgba(201,168,76,0.15); --muted:#8a8070; --surface:#fff;
+    --shadow:0 8px 40px rgba(13,13,13,0.08); --shadow-sm:0 2px 12px rgba(13,13,13,0.06);
+    --radius:16px; --radius-sm:10px; --green:#1a6b3c; --green-bg:#f0faf5;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'DM Sans',sans-serif; background:var(--paper); min-height:100vh; position:relative; overflow-x:hidden; }
-  body::before { content:''; position:fixed; inset:0; background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(201,168,76,0.04) 0%,transparent 60%); pointer-events:none; z-index:0; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--paper);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 90%,rgba(201,168,76,0.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
   /* PIN */
-  #pin-screen { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; z-index:100; background:var(--paper); }
-  .pin-wrapper { width:100%; max-width:400px; display:flex; flex-direction:column; gap:28px; animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both; }
-  .pin-header { text-align:center; display:flex; flex-direction:column; align-items:center; gap:14px; }
-  .logo-mark { width:60px; height:60px; border:1.5px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; position:relative; }
-  .logo-mark::before { content:''; position:absolute; inset:5px; border:1px solid var(--gold-light); border-radius:50%; opacity:0.5; }
-  .logo-mark svg { width:26px; height:26px; stroke:var(--gold); fill:none; stroke-width:1.5; }
-  .brand-name { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:var(--ink); letter-spacing:0.12em; text-transform:uppercase; }
-  .brand-sub { font-size:11px; font-weight:300; color:var(--muted); letter-spacing:0.25em; text-transform:uppercase; margin-top:2px; }
-  .divider { width:36px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
-  .pin-card { background:var(--surface); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow); border:1px solid rgba(13,13,13,0.06); display:flex; flex-direction:column; gap:20px; }
-  .pin-card-title { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:400; color:var(--ink); }
-  .pin-card-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-top:-12px; }
-  .pin-dots { display:flex; justify-content:center; gap:14px; margin:4px 0; }
-  .pin-dot { width:13px; height:13px; border-radius:50%; border:2px solid rgba(13,13,13,0.15); transition:all 0.2s ease; }
-  .pin-dot.filled { background:var(--ink); border-color:var(--ink); transform:scale(1.1); }
-  .pin-dot.error { background:#c0392b; border-color:#c0392b; animation:shake 0.4s ease; }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-  .pin-error { text-align:center; font-size:13px; color:#c0392b; height:16px; }
-  .keypad { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
-  .key { aspect-ratio:1; border:1.5px solid rgba(13,13,13,0.08); border-radius:11px; background:var(--paper); font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--ink); cursor:pointer; transition:all 0.15s ease; display:flex; align-items:center; justify-content:center; user-select:none; -webkit-tap-highlight-color:transparent; }
-  .key:hover { background:#fff; border-color:var(--gold); }
-  .key:active { transform:scale(0.93); background:var(--gold-dim); }
-  .key.key-empty { background:transparent; border-color:transparent; cursor:default; }
+  #pin-screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100;background:var(--paper);}
+  .pin-wrapper{width:100%;max-width:400px;display:flex;flex-direction:column;gap:28px;animation:fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) both;}
+  .pin-header{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;}
+  .logo-mark{width:60px;height:60px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+  .logo-mark::before{content:'';position:absolute;inset:5px;border:1px solid var(--gold-light);border-radius:50%;opacity:0.5;}
+  .logo-mark svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+  .brand-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--ink);letter-spacing:0.12em;text-transform:uppercase;}
+  .brand-sub{font-size:11px;font-weight:300;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;margin-top:2px;}
+  .divider{width:36px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+  .pin-card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);border:1px solid rgba(13,13,13,0.06);display:flex;flex-direction:column;gap:20px;}
+  .pin-card-title{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink);}
+  .pin-card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-top:-12px;}
+  .pin-dots{display:flex;justify-content:center;gap:14px;margin:4px 0;}
+  .pin-dot{width:13px;height:13px;border-radius:50%;border:2px solid rgba(13,13,13,0.15);transition:all 0.2s ease;}
+  .pin-dot.filled{background:var(--ink);border-color:var(--ink);transform:scale(1.1);}
+  .pin-dot.error{background:#c0392b;border-color:#c0392b;animation:shake 0.4s ease;}
+  @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+  .pin-error{text-align:center;font-size:13px;color:#c0392b;height:16px;}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .key{aspect-ratio:1;border:1.5px solid rgba(13,13,13,0.08);border-radius:11px;background:var(--paper);font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);cursor:pointer;transition:all 0.15s ease;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-tap-highlight-color:transparent;}
+  .key:hover{background:#fff;border-color:var(--gold);}
+  .key:active{transform:scale(0.93);background:var(--gold-dim);}
+  .key.key-empty{background:transparent;border-color:transparent;cursor:default;}
 
   /* APP */
-  #app-screen { display:none; min-height:100vh; }
-  .sidebar { position:fixed; left:0; top:0; bottom:0; width:240px; background:var(--ink); display:flex; flex-direction:column; z-index:50; box-shadow:4px 0 24px rgba(13,13,13,0.12); }
-  .sidebar-header { padding:28px 24px 20px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; align-items:center; gap:10px; }
-  .sidebar-logo { width:42px; height:42px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; }
-  .sidebar-logo svg { width:20px; height:20px; stroke:var(--gold); fill:none; stroke-width:1.5; }
-  .sidebar-brand { font-family:'Cormorant Garamond',serif; font-size:16px; font-weight:600; color:#fff; letter-spacing:0.1em; text-transform:uppercase; }
-  .sidebar-sub { font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:0.15em; text-transform:uppercase; }
-  .sidebar-nav { flex:1; padding:16px 12px; display:flex; flex-direction:column; gap:4px; overflow-y:auto; }
-  .nav-label { font-size:10px; color:rgba(255,255,255,0.25); letter-spacing:0.2em; text-transform:uppercase; padding:12px 12px 6px; }
-  .nav-item { display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:10px; cursor:pointer; transition:all 0.2s ease; color:rgba(255,255,255,0.5); font-size:13px; font-weight:400; border:none; background:transparent; width:100%; text-align:left; }
-  .nav-item svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.5; flex-shrink:0; }
-  .nav-item:hover { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.8); }
-  .nav-item.active { background:rgba(201,168,76,0.15); color:var(--gold); }
-  .nav-item.active svg { stroke:var(--gold); }
-  .sidebar-footer { padding:16px 12px; border-top:1px solid rgba(255,255,255,0.06); }
-  .sidebar-badge { background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.2); border-radius:8px; padding:10px 12px; font-size:11px; color:var(--gold); line-height:1.5; }
-  .main { margin-left:240px; min-height:100vh; padding:32px; position:relative; z-index:1; }
-  .page { display:none; flex-direction:column; gap:24px; }
-  .page.active { display:flex; animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-  .page-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; color:var(--ink); }
-  .page-subtitle { font-size:13px; color:var(--muted); margin-top:4px; margin-bottom:4px; }
-  .card { background:var(--surface); border-radius:var(--radius); padding:28px; box-shadow:var(--shadow-sm); border:1px solid rgba(13,13,13,0.05); }
-  .card-title { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:var(--ink); margin-bottom:6px; }
-  .card-desc { font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:20px; }
+  #app-screen{display:none;min-height:100vh;}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:240px;background:var(--ink);display:flex;flex-direction:column;z-index:50;box-shadow:4px 0 24px rgba(13,13,13,0.12);}
+  .sidebar-header{padding:28px 24px 20px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .sidebar-logo{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .sidebar-logo svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+  .sidebar-brand{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:#fff;letter-spacing:0.1em;text-transform:uppercase;}
+  .sidebar-sub{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:0.15em;text-transform:uppercase;}
+  .sidebar-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;}
+  .nav-label{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:0.2em;text-transform:uppercase;padding:12px 12px 6px;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;transition:all 0.2s ease;color:rgba(255,255,255,0.5);font-size:13px;border:none;background:transparent;width:100%;text-align:left;}
+  .nav-item svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0;}
+  .nav-item:hover{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.8);}
+  .nav-item.active{background:rgba(201,168,76,0.15);color:var(--gold);}
+  .nav-item.active svg{stroke:var(--gold);}
+  .sidebar-footer{padding:16px 12px;border-top:1px solid rgba(255,255,255,0.06);}
+  .sidebar-badge{background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--gold);line-height:1.5;}
+  .main{margin-left:240px;min-height:100vh;padding:32px;position:relative;z-index:1;}
+  .page{display:none;flex-direction:column;gap:24px;}
+  .page.active{display:flex;animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  .page-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ink);}
+  .page-subtitle{font-size:13px;color:var(--muted);margin-top:4px;}
+  .card{background:var(--surface);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);border:1px solid rgba(13,13,13,0.05);}
+  .card-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--ink);margin-bottom:6px;}
+  .card-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
 
   /* Form */
-  .fields { display:flex; flex-direction:column; gap:14px; }
-  .field { display:flex; flex-direction:column; gap:7px; }
-  label { font-size:11px; font-weight:500; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; }
-  .input-wrap { position:relative; display:flex; align-items:center; }
-  .input-wrap svg { position:absolute; left:13px; width:15px; height:15px; stroke:var(--muted); fill:none; stroke-width:1.5; pointer-events:none; }
-  input { width:100%; padding:13px 13px 13px 40px; border:1.5px solid rgba(13,13,13,0.1); border-radius:var(--radius-sm); font-family:'DM Sans',sans-serif; font-size:15px; color:var(--ink); background:var(--paper); transition:all 0.2s ease; outline:none; -webkit-appearance:none; }
-  input:focus { border-color:var(--gold); background:#fff; box-shadow:0 0 0 4px var(--gold-dim); }
-  input::placeholder { color:#bbb; font-weight:300; }
-  .btn { width:100%; padding:15px; background:var(--ink); color:#fff; border:none; border-radius:var(--radius-sm); font-family:'DM Sans',sans-serif; font-size:15px; font-weight:500; cursor:pointer; transition:all 0.25s ease; display:flex; align-items:center; justify-content:center; gap:10px; position:relative; overflow:hidden; margin-top:16px; }
-  .btn::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,var(--gold) 0%,transparent 60%); opacity:0; transition:opacity 0.3s ease; }
-  .btn:hover::before { opacity:0.15; }
-  .btn:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(13,13,13,0.2); }
-  .btn:active { transform:translateY(0); }
-  .btn.loading { pointer-events:none; opacity:0.7; }
-  .btn svg { width:17px; height:17px; stroke:currentColor; fill:none; stroke-width:2; position:relative; z-index:1; }
-  .btn span { position:relative; z-index:1; }
+  .fields{display:flex;flex-direction:column;gap:14px;}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  label{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;}
+  .input-wrap{position:relative;display:flex;align-items:center;}
+  .input-wrap svg{position:absolute;left:13px;width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:1.5;pointer-events:none;}
+  input{width:100%;padding:13px 13px 13px 40px;border:1.5px solid rgba(13,13,13,0.1);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:var(--paper);transition:all 0.2s ease;outline:none;-webkit-appearance:none;}
+  input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px var(--gold-dim);}
+  input::placeholder{color:#bbb;font-weight:300;}
+  .btn{width:100%;padding:15px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden;margin-top:16px;}
+  .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold) 0%,transparent 60%);opacity:0;transition:opacity 0.3s ease;}
+  .btn:hover::before{opacity:0.15;}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(13,13,13,0.2);}
+  .btn:active{transform:translateY(0);}
+  .btn.loading{pointer-events:none;opacity:0.7;}
+  .btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;position:relative;z-index:1;}
+  .btn span{position:relative;z-index:1;}
+  .btn-gold{background:linear-gradient(135deg,var(--gold),#a8832a);box-shadow:0 4px 20px rgba(201,168,76,0.3);}
+  .btn-gold:hover{box-shadow:0 8px 32px rgba(201,168,76,0.4);}
+  .btn-outline{background:transparent;color:var(--ink);border:1.5px solid rgba(13,13,13,0.15);margin-top:0;}
+  .btn-outline:hover{border-color:var(--ink);background:rgba(13,13,13,0.04);}
+  .btn-outline:hover::before{opacity:0;}
 
-  /* Agenda */
-  .agenda-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
-  .agenda-nav { display:flex; align-items:center; gap:10px; }
-  .nav-btn { width:36px; height:36px; border:1.5px solid rgba(13,13,13,0.1); border-radius:8px; background:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s ease; }
-  .nav-btn:hover { border-color:var(--gold); background:var(--gold-dim); }
-  .nav-btn svg { width:14px; height:14px; stroke:var(--ink); fill:none; stroke-width:2; }
-  .week-label { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; color:var(--ink); min-width:200px; text-align:center; }
-  .today-btn { padding:8px 16px; border:1.5px solid rgba(13,13,13,0.1); border-radius:8px; background:var(--paper); font-size:12px; color:var(--muted); cursor:pointer; transition:all 0.15s ease; font-family:'DM Sans',sans-serif; }
-  .today-btn:hover { border-color:var(--gold); color:var(--gold); }
-  .week-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:8px; }
-  .day-col { display:flex; flex-direction:column; gap:6px; }
-  .day-header { text-align:center; padding:10px 4px; border-radius:8px; background:rgba(13,13,13,0.03); }
-  .day-name { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; font-weight:500; }
-  .day-num { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--ink); }
-  .day-header.today { background:var(--ink); }
-  .day-header.today .day-name { color:var(--gold); }
-  .day-header.today .day-num { color:#fff; }
-  .day-events { display:flex; flex-direction:column; gap:5px; min-height:50px; }
-  .ev-card { background:var(--ink); border-radius:7px; padding:8px 10px; cursor:pointer; transition:all 0.15s ease; border-left:3px solid var(--gold); }
-  .ev-card:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(13,13,13,0.15); }
-  .ev-time { font-size:10px; color:var(--gold); font-weight:500; }
-  .ev-name { font-size:11px; color:#fff; font-weight:500; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .ev-reason { font-size:10px; color:rgba(255,255,255,0.4); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .no-ev { font-size:11px; color:rgba(13,13,13,0.2); text-align:center; padding:12px 0; }
-  .agenda-loading { text-align:center; padding:40px; color:var(--muted); font-size:13px; grid-column:1/-1; }
+  /* Scanner */
+  .scanner-hero{display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px 28px;text-align:center;}
+  .scanner-icon-wrap{width:100px;height:100px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;box-shadow:0 8px 32px rgba(13,13,13,0.2);}
+  .scanner-icon-wrap::before{content:'';position:absolute;inset:-6px;border:2px solid var(--gold);border-radius:50%;opacity:0.4;animation:scanPulse 2s ease infinite;}
+  .scanner-icon-wrap::after{content:'';position:absolute;inset:-14px;border:1px solid var(--gold);border-radius:50%;opacity:0.15;animation:scanPulse 2s ease infinite 0.5s;}
+  @keyframes scanPulse{0%,100%{transform:scale(1);opacity:0.4}50%{transform:scale(1.06);opacity:0.6}}
+  .scanner-icon-wrap svg{width:44px;height:44px;stroke:var(--gold);fill:none;stroke-width:1.2;}
+  .scanner-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ink);}
+  .scanner-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:320px;}
 
-  /* Modal */
-  .modal-bg { position:fixed; inset:0; background:rgba(13,13,13,0.5); z-index:200; display:none; align-items:center; justify-content:center; padding:24px; backdrop-filter:blur(4px); }
-  .modal-bg.show { display:flex; }
-  .modal { background:var(--surface); border-radius:var(--radius); padding:28px; max-width:400px; width:100%; box-shadow:0 24px 80px rgba(13,13,13,0.2); animation:fadeUp 0.3s cubic-bezier(0.16,1,0.3,1) both; }
-  .modal-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:20px; }
-  .modal-ttl { font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--ink); }
-  .modal-x { width:30px; height:30px; border:none; background:rgba(13,13,13,0.05); border-radius:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-  .modal-x svg { width:14px; height:14px; stroke:var(--muted); fill:none; stroke-width:2; }
-  .modal-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; }
-  .modal-ico { width:32px; height:32px; border-radius:8px; background:var(--paper); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-  .modal-ico svg { width:14px; height:14px; stroke:var(--gold); fill:none; stroke-width:1.5; }
-  .modal-lbl { font-size:10px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2px; }
-  .modal-val { font-size:14px; color:var(--ink); font-weight:500; }
+  .scanner-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:4px;}
+  .step{background:var(--paper);border-radius:12px;padding:16px 12px;text-align:center;border:1px solid rgba(13,13,13,0.05);}
+  .step-num{width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
+  .step-text{font-size:11px;color:var(--muted);line-height:1.5;}
+
+  /* Viewfinder */
+  #viewfinder-wrap{display:none;flex-direction:column;gap:16px;align-items:center;}
+  .viewfinder{width:100%;max-width:500px;position:relative;border-radius:16px;overflow:hidden;background:#000;aspect-ratio:4/3;}
+  #camera-video{width:100%;height:100%;object-fit:cover;}
+  .vf-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+  .vf-frame{width:75%;height:55%;border:2px solid var(--gold);border-radius:8px;position:relative;box-shadow:0 0 0 2000px rgba(0,0,0,0.4);}
+  .vf-corner{position:absolute;width:20px;height:20px;border-color:var(--gold);border-style:solid;}
+  .vf-corner.tl{top:-2px;left:-2px;border-width:3px 0 0 3px;border-radius:4px 0 0 0;}
+  .vf-corner.tr{top:-2px;right:-2px;border-width:3px 3px 0 0;border-radius:0 4px 0 0;}
+  .vf-corner.bl{bottom:-2px;left:-2px;border-width:0 0 3px 3px;border-radius:0 0 0 4px;}
+  .vf-corner.br{bottom:-2px;right:-2px;border-width:0 3px 3px 0;border-radius:0 0 4px 0;}
+  .scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanLine 2s ease-in-out infinite;}
+  @keyframes scanLine{0%{top:10%}50%{top:85%}100%{top:10%}}
+  .vf-label{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,0.7);letter-spacing:0.1em;text-transform:uppercase;}
+
+  /* Résultat scan */
+  #scan-result{display:none;animation:fadeUp 0.4s cubic-bezier(0.16,1,0.3,1) both;}
+  .result-card{background:var(--green-bg);border:1.5px solid rgba(26,107,60,0.2);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:16px;}
+  .result-header{display:flex;align-items:center;gap:12px;}
+  .result-check{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .result-check svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.5;}
+  .result-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--green);}
+  .result-sub{font-size:12px;color:rgba(26,107,60,0.7);}
+  .result-info{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .result-field{background:#fff;border-radius:10px;padding:12px 14px;}
+  .result-field-lbl{font-size:10px;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:4px;}
+  .result-field-val{font-size:15px;color:var(--ink);font-weight:500;}
+  .result-field.full{grid-column:1/-1;}
+
+  /* Timeline SMS */
+  .sms-timeline{display:flex;flex-direction:column;gap:0;}
+  .sms-item{display:flex;gap:14px;align-items:flex-start;padding:12px 0;position:relative;}
+  .sms-item:not(:last-child)::after{content:'';position:absolute;left:17px;top:42px;bottom:-2px;width:1px;background:rgba(13,13,13,0.08);}
+  .sms-dot{width:34px;height:34px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+  .sms-dot svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:1.5;}
+  .sms-dot.immediate{background:var(--green);}
+  .sms-dot.immediate svg{stroke:#fff;}
+  .sms-content{flex:1;padding-top:6px;}
+  .sms-timing{font-size:10px;font-weight:600;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3px;}
+  .sms-timing.immediate{color:var(--green);}
+  .sms-title{font-size:14px;color:var(--ink);font-weight:500;margin-bottom:2px;}
+  .sms-preview{font-size:12px;color:var(--muted);line-height:1.5;font-style:italic;}
+
+  /* Historique */
+  .history-list{display:flex;flex-direction:column;gap:8px;}
+  .history-item{background:var(--surface);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;border:1px solid rgba(13,13,13,0.05);transition:all 0.15s ease;}
+  .history-item:hover{box-shadow:var(--shadow-sm);}
+  .history-avatar{width:38px;height:38px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);flex-shrink:0;}
+  .history-info{flex:1;}
+  .history-name{font-size:14px;color:var(--ink);font-weight:500;}
+  .history-meta{font-size:12px;color:var(--muted);margin-top:2px;}
+  .history-badge{font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500;}
+  .badge-sent{background:rgba(26,107,60,0.1);color:var(--green);}
+  .badge-pending{background:var(--gold-dim);color:#7a5a00;}
+
+  /* Formulaire manuel */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 
   /* Toast */
-  .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--ink); color:#fff; padding:13px 22px; border-radius:100px; font-size:13px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 32px rgba(13,13,13,0.25); transition:transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index:300; white-space:nowrap; }
-  .toast.show { transform:translateX(-50%) translateY(0); }
-  .toast.success { background:#1a3a2a; }
-  .toast.error { background:#3a1a1a; }
-  .toast svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
+  .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:13px 22px;border-radius:100px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(13,13,13,0.25);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);z-index:300;white-space:nowrap;}
+  .toast.show{transform:translateX(-50%) translateY(0);}
+  .toast.success{background:#1a3a2a;}
+  .toast.error{background:#3a1a1a;}
+  .toast svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
 
-  @keyframes spin { to{transform:rotate(360deg)} }
-  .spinner { animation:spin 0.8s linear infinite; transform-origin:center; }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spinner{animation:spin 0.8s linear infinite;transform-origin:center;}
 
-  /* Dashboard */
-  .stats-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-  .stat-card { background:var(--surface); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-sm); border:1px solid rgba(13,13,13,0.05); display:flex; flex-direction:column; gap:8px; }
-  .stat-icon { width:40px; height:40px; border-radius:10px; background:var(--ink); display:flex; align-items:center; justify-content:center; }
-  .stat-icon svg { width:18px; height:18px; stroke:var(--gold); fill:none; stroke-width:1.5; }
-  .stat-value { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:400; color:var(--ink); line-height:1; }
-  .stat-label { font-size:12px; color:var(--muted); }
-  .stat-loading { font-size:32px; color:rgba(13,13,13,0.15); }
-  .recent-table { width:100%; border-collapse:collapse; }
-  .recent-table th { font-size:10px; color:var(--muted); letter-spacing:0.15em; text-transform:uppercase; padding:0 12px 12px; text-align:left; border-bottom:1px solid rgba(13,13,13,0.08); }
-  .recent-table td { padding:12px; font-size:13px; color:var(--ink); border-bottom:1px solid rgba(13,13,13,0.04); }
-  .recent-table tr:last-child td { border-bottom:none; }
-  .badge { display:inline-block; padding:3px 8px; border-radius:100px; font-size:11px; font-weight:500; }
-  .badge-rdv { background:rgba(13,13,13,0.06); color:var(--ink); }
-  .badge-check { background:var(--gold-dim); color:#7a5a00; }
-  .refresh-btn { padding:8px 16px; border:1.5px solid rgba(13,13,13,0.1); border-radius:8px; background:var(--paper); font-size:12px; color:var(--muted); cursor:pointer; transition:all 0.15s ease; font-family:'DM Sans',sans-serif; display:flex; align-items:center; gap:6px; }
-  .refresh-btn:hover { border-color:var(--gold); color:var(--gold); }
-  .refresh-btn svg { width:13px; height:13px; stroke:currentColor; fill:none; stroke-width:2; }
-  @media(max-width:600px) { .stats-grid{grid-template-columns:1fr 1fr;} }
-
-  @media(max-width:900px) {
-    .sidebar { width:60px; }
-    .sidebar-brand,.sidebar-sub,.nav-label,.nav-item span,.sidebar-badge { display:none; }
-    .nav-item { justify-content:center; padding:12px; }
-    .main { margin-left:60px; padding:20px; }
-    .week-grid { grid-template-columns:repeat(4,1fr); }
+  @media(max-width:900px){
+    .sidebar{width:60px;}
+    .sidebar-brand,.sidebar-sub,.nav-label,.nav-item span,.sidebar-badge{display:none;}
+    .nav-item{justify-content:center;padding:12px;}
+    .main{margin-left:60px;padding:20px;}
+    .scanner-steps{grid-template-columns:1fr;}
+    .result-info{grid-template-columns:1fr;}
+    .grid-2{grid-template-columns:1fr;}
   }
-  @media(max-width:600px) {
-    .sidebar { display:none; }
-    .main { margin-left:0; padding:16px; }
-    .week-grid { grid-template-columns:repeat(2,1fr); }
+  @media(max-width:600px){
+    .sidebar{display:none;}
+    .main{margin-left:0;padding:16px;}
   }
 </style>
 </head>
@@ -217,21 +229,17 @@
     </div>
     <div class="sidebar-nav">
       <div class="nav-label">Navigation</div>
-      <button class="nav-item active" onclick="showPage('agenda',this)">
-        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span>Agenda</span>
+      <button class="nav-item active" onclick="showPage('scanner',this)">
+        <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+        <span>Scanner une fiche</span>
       </button>
-      <button class="nav-item" onclick="showPage('lunettes',this)">
-        <svg viewBox="0 0 24 24"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><line x1="11" y1="12" x2="13" y2="12"/></svg>
-        <span>Lunettes arrivées</span>
+      <button class="nav-item" onclick="showPage('historique',this)">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Historique</span>
       </button>
-      <button class="nav-item" onclick="showPage('suivi',this)">
-        <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
-        <span>Suivi J+7</span>
-      </button>
-      <button class="nav-item" onclick="showPage('dashboard',this)">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Dashboard</span>
+      <button class="nav-item" onclick="showPage('manuel',this)">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Saisie manuelle</span>
       </button>
     </div>
     <div class="sidebar-footer">
@@ -241,164 +249,180 @@
 
   <div class="main">
 
-    <!-- AGENDA -->
-    <div class="page active" id="page-agenda">
-      <div><div class="page-title">Agenda</div><div class="page-subtitle">Rendez-vous pris par Clara</div></div>
+    <!-- SCANNER PAGE -->
+    <div class="page active" id="page-scanner">
+      <div><div class="page-title">Scanner une fiche</div><div class="page-subtitle">Pointez la caméra sur le code-barres de la fiche client</div></div>
+
+      <!-- État 1 : accueil scanner -->
+      <div id="scanner-home">
+        <div class="card">
+          <div class="scanner-hero">
+            <div class="scanner-icon-wrap">
+              <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+            </div>
+            <div>
+              <div class="scanner-title">Prêt à scanner</div>
+              <p class="scanner-desc">Positionnez la fiche client devant la caméra. L'application lit automatiquement le nom et le numéro de téléphone.</p>
+            </div>
+          </div>
+          <div class="scanner-steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text">Appuyez sur Scanner</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text">Pointez sur le code-barres</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text">Confirmez et envoyez</div></div>
+          </div>
+          <button class="btn btn-gold" onclick="startScanner(this)" style="margin-top:20px;">
+            <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+            <span>Scanner la fiche</span>
+          </button>
+        </div>
+
+        <!-- Timeline SMS informatif -->
+        <div class="card">
+          <div class="card-title">Ce qui se passe après le scan</div>
+          <p class="card-desc">Une seule action déclenche tout automatiquement.</p>
+          <div class="sms-timeline">
+            <div class="sms-item">
+              <div class="sms-dot immediate"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+              <div class="sms-content">
+                <div class="sms-timing immediate">Immédiat</div>
+                <div class="sms-title">SMS — Lunettes arrivées</div>
+                <div class="sms-preview">"Bonjour [Prénom], votre équipement est prêt ! Venez le récupérer chez House Optic…"</div>
+              </div>
+            </div>
+            <div class="sms-item">
+              <div class="sms-dot"><svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="sms-content">
+                <div class="sms-timing">J + 7</div>
+                <div class="sms-title">SMS — Satisfaction & avis Google</div>
+                <div class="sms-preview">"Tout s'est bien passé ? Laissez-nous un avis, ça nous aide beaucoup…"</div>
+              </div>
+            </div>
+            <div class="sms-item">
+              <div class="sms-dot"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div class="sms-content">
+                <div class="sms-timing">J + 365</div>
+                <div class="sms-title">SMS — Réactivation client</div>
+                <div class="sms-preview">"Cela fait un an que nous vous avons accueilli. Nos nouvelles collections sont arrivées…"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- État 2 : viewfinder caméra -->
+      <div id="viewfinder-wrap">
+        <div class="card" style="width:100%;max-width:560px;">
+          <div class="viewfinder">
+            <video id="camera-video" autoplay playsinline muted></video>
+            <canvas id="camera-canvas" style="display:none;"></canvas>
+            <div class="vf-overlay">
+              <div class="vf-frame">
+                <div class="vf-corner tl"></div>
+                <div class="vf-corner tr"></div>
+                <div class="vf-corner bl"></div>
+                <div class="vf-corner br"></div>
+                <div class="scan-line"></div>
+              </div>
+            </div>
+            <div class="vf-label">Alignez la fiche dans le cadre</div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:16px;">
+            <button class="btn btn-gold" onclick="capturePhoto(this)" style="margin-top:0;flex:1;">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M20.94 11A8.994 8.994 0 1 1 12.45 3.1"/></svg>
+              <span>Analyser la fiche</span>
+            </button>
+            <button class="btn btn-outline" onclick="cancelScanner()" style="flex:0 0 auto;width:auto;padding:15px 20px;">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <span>Annuler</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- État 3 : résultat OCR + confirmation -->
+      <div id="scan-result">
+        <div class="card" style="max-width:560px;">
+          <div class="result-card" id="result-card">
+            <div class="result-header">
+              <div class="result-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div>
+                <div class="result-title">Fiche lue avec succès</div>
+                <div class="result-sub">Vérifiez les informations avant d'envoyer</div>
+              </div>
+            </div>
+            <div class="result-info">
+              <div class="result-field full">
+                <div class="result-field-lbl">Nom du client</div>
+                <div class="result-field-val" id="result-name">—</div>
+              </div>
+              <div class="result-field full">
+                <div class="result-field-lbl">Téléphone</div>
+                <div class="result-field-val" id="result-phone">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="result-error" style="display:none;" class="result-card" style="background:#fdf0f0;border-color:rgba(192,57,43,0.2);">
+            <p style="font-size:13px;color:#c0392b;">Impossible de lire la fiche. Vérifiez l'éclairage et réessayez, ou utilisez la saisie manuelle.</p>
+          </div>
+
+          <div style="display:flex;gap:10px;margin-top:16px;">
+            <button class="btn btn-gold" id="confirm-send-btn" onclick="confirmAndSend(this)" style="margin-top:0;flex:1;">
+              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span>Confirmer et envoyer</span>
+            </button>
+            <button class="btn btn-outline" onclick="resetScanner()" style="flex:0 0 auto;width:auto;padding:15px 20px;margin-top:0;">
+              <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              <span>Rescanner</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORIQUE PAGE -->
+    <div class="page" id="page-historique">
+      <div><div class="page-title">Historique</div><div class="page-subtitle">Fiches scannées et SMS envoyés</div></div>
       <div class="card">
-        <div class="agenda-toolbar">
-          <div class="agenda-nav">
-            <button class="nav-btn" onclick="changeWeek(-1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-            <div class="week-label" id="week-label">—</div>
-            <button class="nav-btn" onclick="changeWeek(1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-          </div>
-          <button class="today-btn" onclick="goToday()">Aujourd'hui</button>
-        </div>
-        <div class="week-grid" id="week-grid">
-          <div class="agenda-loading">Chargement de l'agenda...</div>
+        <div class="card-title">Envois récents</div>
+        <div class="history-list" id="history-list">
+          <p style="font-size:13px;color:var(--muted);text-align:center;padding:24px;">Aucun envoi pour l'instant.</p>
         </div>
       </div>
     </div>
 
-    <!-- LUNETTES -->
-    <div class="page" id="page-lunettes">
-      <div><div class="page-title">Lunettes arrivées</div><div class="page-subtitle">Notifiez un client en 10 secondes</div></div>
-      <div class="card" style="max-width:520px">
-        <div class="card-title">Envoyer une notification SMS</div>
-        <p class="card-desc">Le client reçoit un SMS immédiatement après envoi.</p>
+    <!-- SAISIE MANUELLE PAGE -->
+    <div class="page" id="page-manuel">
+      <div><div class="page-title">Saisie manuelle</div><div class="page-subtitle">Si le scan ne fonctionne pas</div></div>
+
+      <div class="card" style="max-width:520px;">
+        <div class="card-title">Lunettes arrivées</div>
+        <p class="card-desc">Déclenche le SMS immédiat + J+7 + J+365 automatiquement.</p>
         <div class="fields">
-          <div class="field">
-            <label>Prénom et nom</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input type="text" id="l-name" placeholder="ex. Sophie Martin">
+          <div class="grid-2">
+            <div class="field">
+              <label>Prénom et nom</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" id="m-name" placeholder="ex. Sophie Martin">
+              </div>
             </div>
-          </div>
-          <div class="field">
-            <label>Numéro de téléphone</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <input type="tel" id="l-phone" placeholder="06 12 34 56 78">
+            <div class="field">
+              <label>Téléphone</label>
+              <div class="input-wrap">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" id="m-phone" placeholder="06 12 34 56 78">
+              </div>
             </div>
           </div>
         </div>
-        <button class="btn" onclick="sendLunettes(this)">
+        <button class="btn" onclick="sendManuel(this)">
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          <span>Envoyer la notification</span>
+          <span>Déclencher les envois</span>
         </button>
       </div>
     </div>
 
-    <!-- DASHBOARD -->
-    <div class="page" id="page-dashboard">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div><div class="page-title">Dashboard</div><div class="page-subtitle">Activité de Clara en temps réel</div></div>
-        <button class="refresh-btn" onclick="loadDashboard()">
-          <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-          Actualiser
-        </button>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <div class="stat-value" id="stat-today">—</div>
-          <div class="stat-label">Appels traités aujourd'hui</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-          <div class="stat-value" id="stat-rdv">—</div>
-          <div class="stat-label">RDV confirmés ce mois</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <div class="stat-value" id="stat-total">—</div>
-          <div class="stat-label">Appels total historique</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom:16px">Derniers appels traités</div>
-        <div style="overflow-x:auto">
-          <table class="recent-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Client</th>
-                <th>Téléphone</th>
-                <th>Motif</th>
-                <th>Résultat</th>
-              </tr>
-            </thead>
-            <tbody id="recent-rows">
-              <tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Chargement...</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- SUIVI -->
-    <div class="page" id="page-suivi">
-      <div><div class="page-title">Suivi J+7</div><div class="page-subtitle">Programmez un suivi satisfaction automatique</div></div>
-      <div class="card" style="max-width:520px">
-        <div class="card-title">Programmer un suivi</div>
-        <p class="card-desc">Un SMS de suivi sera envoyé 7 jours après la récupération avec un lien vers votre fiche Google.</p>
-        <div class="fields">
-          <div class="field">
-            <label>Prénom et nom</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input type="text" id="s-name" placeholder="ex. Sophie Martin">
-            </div>
-          </div>
-          <div class="field">
-            <label>Numéro de téléphone</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              <input type="tel" id="s-phone" placeholder="06 12 34 56 78">
-            </div>
-          </div>
-          <div class="field">
-            <label>Date de récupération</label>
-            <div class="input-wrap">
-              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <input type="date" id="s-date" style="padding-left:40px">
-            </div>
-          </div>
-        </div>
-        <button class="btn" onclick="sendSuivi(this)">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          <span>Programmer le suivi</span>
-        </button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- Event Modal -->
-<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
-  <div class="modal">
-    <div class="modal-top">
-      <div class="modal-ttl">Détail du rendez-vous</div>
-      <button class="modal-x" onclick="closeModal()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-    </div>
-    <div class="modal-row">
-      <div class="modal-ico"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-      <div><div class="modal-lbl">Client</div><div class="modal-val" id="m-client">—</div></div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-      <div><div class="modal-lbl">Date et heure</div><div class="modal-val" id="m-dt">—</div></div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-      <div><div class="modal-lbl">Motif</div><div class="modal-val" id="m-reason">—</div></div>
-    </div>
-    <div class="modal-row">
-      <div class="modal-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-      <div><div class="modal-lbl">Téléphone</div><div class="modal-val" id="m-phone">—</div></div>
-    </div>
   </div>
 </div>
 
@@ -409,26 +433,24 @@
 </div>
 
 <script>
-  const WEBHOOK_STATS    = 'https://yaniszedira.app.n8n.cloud/webhook/stats';
+  // ── CONFIG ────────────────────────────────────────────────────
+  const WEBHOOK_LUNETTES = 'https://yaniszedira.app.n8n.cloud/webhook/lunettes-arrivees';
   const WEBHOOK_SUIVI    = 'https://yaniszedira.app.n8n.cloud/webhook/suivi-client';
-  const WEBHOOK_AGENDA   = 'https://yaniszedira.app.n8n.cloud/webhook/agenda';
+  const ANTHROPIC_API    = 'https://api.anthropic.com/v1/messages';
   const PIN_HASH         = '158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab';
-  const DAY_NAMES        = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-  const MONTHS           = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
-  // PIN
+  // ── PIN ───────────────────────────────────────────────────────
   let pinInput = '';
-  async function hashPin(p) { const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p)); return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
-  function updateDots() { for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.toggle('filled',i<pinInput.length);d.classList.remove('error');} }
-  async function pressKey(k) { if(pinInput.length>=4)return; pinInput+=k; updateDots(); if(pinInput.length===4)await checkPin(); }
-  function deleteKey() { pinInput=pinInput.slice(0,-1); updateDots(); document.getElementById('pin-error').textContent=''; }
-  async function checkPin() {
+  async function hashPin(p){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(p));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
+  function updateDots(){for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.toggle('filled',i<pinInput.length);d.classList.remove('error');}}
+  async function pressKey(k){if(pinInput.length>=4)return;pinInput+=k;updateDots();if(pinInput.length===4)await checkPin();}
+  function deleteKey(){pinInput=pinInput.slice(0,-1);updateDots();document.getElementById('pin-error').textContent='';}
+  async function checkPin(){
     const h=await hashPin(pinInput);
     if(h===PIN_HASH){
       document.getElementById('pin-screen').style.display='none';
       document.getElementById('app-screen').style.display='block';
-      document.getElementById('s-date').valueAsDate=new Date();
-      loadWeek();
+      renderHistory();
     } else {
       for(let i=0;i<4;i++){const d=document.getElementById('d'+i);d.classList.remove('filled');d.classList.add('error');}
       document.getElementById('pin-error').textContent='Code incorrect, réessayez.';
@@ -437,148 +459,198 @@
   }
   document.addEventListener('keydown',e=>{if(document.getElementById('pin-screen').style.display==='none')return;if(e.key>='0'&&e.key<='9')pressKey(e.key);if(e.key==='Backspace')deleteKey();});
 
-  // Navigation
-  function showPage(page,el) {
+  // ── NAVIGATION ────────────────────────────────────────────────
+  function showPage(page,el){
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
     document.getElementById('page-'+page).classList.add('active');
     el.classList.add('active');
-    if(page==='agenda')loadWeek();
-    if(page==='dashboard')loadDashboard();
+    if(page==='historique')renderHistory();
   }
 
-  async function loadDashboard() {
-    document.getElementById('stat-today').textContent='...';
-    document.getElementById('stat-rdv').textContent='...';
-    document.getElementById('stat-total').textContent='...';
-    document.getElementById('recent-rows').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Chargement...</td></tr>';
+  // ── SCANNER / CAMÉRA ─────────────────────────────────────────
+  let stream = null;
+  let scannedName = '', scannedPhone = '';
+
+  async function startScanner(btn) {
+    const orig = btn.querySelector('span').textContent;
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = 'Activation caméra...';
     try {
-      const res = await fetch(WEBHOOK_STATS);
-      const data = await res.json();
-      document.getElementById('stat-today').textContent = data.aujourdhui ?? 0;
-      document.getElementById('stat-rdv').textContent = data.rdvConfirmes ?? 0;
-      document.getElementById('stat-total').textContent = data.totalAppels ?? 0;
-      if(data.recent && data.recent.length > 0) {
-        document.getElementById('recent-rows').innerHTML = data.recent.map(r => `
-          <tr>
-            <td>${r.date||'—'}</td>
-            <td><strong>${r.name||'—'}</strong></td>
-            <td>${r.phone||'—'}</td>
-            <td>${r.reason||'—'}</td>
-            <td><span class="badge ${r.result==='RDV confirmé'?'badge-rdv':'badge-check'}">${r.result||'—'}</span></td>
-          </tr>
-        `).join('');
-      } else {
-        document.getElementById('recent-rows').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Aucun appel enregistré</td></tr>';
-      }
+      stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 960 } }
+      });
+      document.getElementById('camera-video').srcObject = stream;
+      document.getElementById('scanner-home').style.display = 'none';
+      document.getElementById('scan-result').style.display = 'none';
+      document.getElementById('viewfinder-wrap').style.display = 'flex';
     } catch(e) {
-      document.getElementById('stat-today').textContent='—';
-      document.getElementById('stat-rdv').textContent='—';
-      document.getElementById('stat-total').textContent='—';
-      document.getElementById('recent-rows').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Erreur de chargement</td></tr>';
+      showToast('Caméra non disponible. Utilisez la saisie manuelle.', 'error');
+      btn.classList.remove('loading');
+      btn.querySelector('span').textContent = orig;
     }
+    btn.classList.remove('loading');
+    btn.querySelector('span').textContent = orig;
   }
 
-  // Agenda
-  let weekOffset=0;
-  function getWeekDates(off) {
-    const now=new Date(),day=now.getDay(),mon=new Date(now);
-    mon.setDate(now.getDate()-(day===0?6:day-1)+off*7);
-    mon.setHours(0,0,0,0);
-    return Array.from({length:7},(_,i)=>{const d=new Date(mon);d.setDate(mon.getDate()+i);return d;});
-  }
-  function fmtWeekLabel(days) {
-    const s=days[0],e=days[6];
-    if(s.getMonth()===e.getMonth()) return `${s.getDate()} – ${e.getDate()} ${MONTHS[s.getMonth()]} ${s.getFullYear()}`;
-    return `${s.getDate()} ${MONTHS[s.getMonth()]} – ${e.getDate()} ${MONTHS[e.getMonth()]} ${e.getFullYear()}`;
-  }
-  function isToday(d) { const t=new Date(); return d.getDate()===t.getDate()&&d.getMonth()===t.getMonth()&&d.getFullYear()===t.getFullYear(); }
+  async function capturePhoto(btn) {
+    const video = document.getElementById('camera-video');
+    const canvas = document.getElementById('camera-canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0);
 
-  async function loadWeek() {
-    const days=getWeekDates(weekOffset);
-    document.getElementById('week-label').textContent=fmtWeekLabel(days);
-    const grid=document.getElementById('week-grid');
-    grid.innerHTML='<div class="agenda-loading">Chargement...</div>';
-    const start=days[0].toISOString();
-    const endD=new Date(days[6]); endD.setHours(23,59,59,999);
-    let events=[];
+    btn.classList.add('loading');
+    btn.querySelector('span').textContent = 'Analyse en cours...';
+
+    const imageData = canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+
     try {
-      const res=await fetch(`${WEBHOOK_AGENDA}?start=${encodeURIComponent(start)}&end=${encodeURIComponent(endD.toISOString())}`);
-      const data=await res.json();
-      if(Array.isArray(data))events=data;
-      else if(data&&Array.isArray(data.items))events=data.items;
-      else if(data&&data.id)events=[data];
-    } catch(e){}
-    grid.innerHTML='';
-    days.forEach((day,i)=>{
-      const col=document.createElement('div'); col.className='day-col';
-      const hdr=document.createElement('div'); hdr.className='day-header'+(isToday(day)?' today':'');
-      hdr.innerHTML=`<div class="day-name">${DAY_NAMES[i]}</div><div class="day-num">${day.getDate()}</div>`;
-      col.appendChild(hdr);
-      const evDiv=document.createElement('div'); evDiv.className='day-events';
-      const dayEvs=events.filter(e=>{const d=new Date(e.start?.dateTime||e.start?.date||e.start);return d.toDateString()===day.toDateString();});
-      if(!dayEvs.length){evDiv.innerHTML='<div class="no-ev">—</div>';}
-      else {
-        dayEvs.sort((a,b)=>new Date(a.start?.dateTime||a.start)-new Date(b.start?.dateTime||b.start));
-        dayEvs.forEach(ev=>{
-          const card=document.createElement('div'); card.className='ev-card';
-          const t=new Date(ev.start?.dateTime||ev.start);
-          const tStr=t.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
-          const sum=ev.summary||'RDV';
-          const name=sum.split(' - ')[0]||sum;
-          const reason=sum.includes(' - ')?sum.split(' - ')[1]:'';
-          card.innerHTML=`<div class="ev-time">${tStr}</div><div class="ev-name">${name}</div>${reason?`<div class="ev-reason">${reason}</div>`:''}`;
-          card.onclick=()=>openModal(ev);
-          evDiv.appendChild(card);
-        });
+      const response = await fetch(ANTHROPIC_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 200,
+          messages: [{
+            role: 'user',
+            content: [
+              {
+                type: 'image',
+                source: { type: 'base64', media_type: 'image/jpeg', data: imageData }
+              },
+              {
+                type: 'text',
+                text: 'Cette image est une fiche client d\'un opticien. Extrais uniquement le nom complet du client et son numéro de téléphone. Réponds UNIQUEMENT en JSON sans aucun autre texte, format exact: {"nom":"PRENOM NOM","telephone":"0X XX XX XX XX"}. Si tu ne trouves pas une des informations, mets null.'
+              }
+            ]
+          }]
+        })
+      });
+
+      const data = await response.json();
+      const text = data.content?.[0]?.text || '';
+      const clean = text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(clean);
+
+      stopCamera();
+
+      if(parsed.nom && parsed.telephone) {
+        scannedName = parsed.nom;
+        scannedPhone = parsed.telephone;
+        document.getElementById('result-name').textContent = parsed.nom;
+        document.getElementById('result-phone').textContent = parsed.telephone;
+        document.getElementById('result-card').style.display = 'flex';
+        document.getElementById('result-error') && (document.getElementById('result-error').style.display = 'none');
+        document.getElementById('confirm-send-btn').style.display = 'flex';
+      } else {
+        scannedName = '';
+        scannedPhone = '';
+        document.getElementById('result-card').style.display = 'none';
+        if(document.getElementById('result-error')) document.getElementById('result-error').style.display = 'block';
+        document.getElementById('confirm-send-btn').style.display = 'none';
       }
-      col.appendChild(evDiv); grid.appendChild(col);
-    });
-  }
-  function changeWeek(d){weekOffset+=d;loadWeek();}
-  function goToday(){weekOffset=0;loadWeek();}
 
-  function openModal(ev) {
-    const sum=ev.summary||'RDV';
-    const name=sum.split(' - ')[0]||sum;
-    const reason=sum.includes(' - ')?sum.split(' - ')[1]:'—';
-    const s=new Date(ev.start?.dateTime||ev.start);
-    const e=new Date(ev.end?.dateTime||ev.end);
-    const dateStr=s.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',timeZone:'Europe/Paris'});
-    const sT=s.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
-    const eT=e.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Paris'});
-    const phone=ev.description?ev.description.replace('Téléphone : ',''):'—';
-    document.getElementById('m-client').textContent=name;
-    document.getElementById('m-dt').textContent=`${dateStr} · ${sT} – ${eT}`;
-    document.getElementById('m-reason').textContent=reason;
-    document.getElementById('m-phone').textContent=phone;
-    document.getElementById('modal-bg').classList.add('show');
-  }
-  function closeModal(e){if(!e||e.target===document.getElementById('modal-bg'))document.getElementById('modal-bg').classList.remove('show');}
+      document.getElementById('viewfinder-wrap').style.display = 'none';
+      document.getElementById('scan-result').style.display = 'block';
 
-  // Utils
-  function fmtPhone(r){const d=r.replace(/\D/g,'');if(d.startsWith('33'))return'+'+d;if(d.startsWith('0'))return'+33'+d.slice(1);return'+33'+d;}
-  function showToast(msg,type='success'){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;document.getElementById('toast-icon').innerHTML=type==='success'?'<polyline points="20 6 9 17 4 12"/>':'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';t.className='toast '+type;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+    } catch(e) {
+      stopCamera();
+      showToast('Erreur d\'analyse. Réessayez ou saisissez manuellement.', 'error');
+      document.getElementById('viewfinder-wrap').style.display = 'none';
+      document.getElementById('scanner-home').style.display = 'block';
+    }
+
+    btn.classList.remove('loading');
+    btn.querySelector('span').textContent = 'Analyser la fiche';
+  }
+
+  function stopCamera(){
+    if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}
+  }
+
+  function cancelScanner(){
+    stopCamera();
+    document.getElementById('viewfinder-wrap').style.display='none';
+    document.getElementById('scanner-home').style.display='block';
+  }
+
+  function resetScanner(){
+    document.getElementById('scan-result').style.display='none';
+    document.getElementById('scanner-home').style.display='block';
+    scannedName='';scannedPhone='';
+  }
+
+  async function confirmAndSend(btn) {
+    if(!scannedName||!scannedPhone){showToast('Informations manquantes.','error');return;}
+    setLoad(btn,true,'Envoi...');
+    await triggerSmsFlow(scannedName, scannedPhone, btn, 'Confirmer et envoyer');
+    resetScanner();
+  }
+
+  // ── ENVOI SMS FLOW (lunettes + suivi J+7) ────────────────────
+  async function triggerSmsFlow(name, phone, btn, btnLabel) {
+    const fmtP = fmtPhone(phone);
+    const today = new Date().toISOString().split('T')[0];
+    try {
+      // SMS lunettes arrivées immédiat
+      await fetch(`${WEBHOOK_LUNETTES}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtP)}`);
+      // Suivi J+7
+      await fetch(`${WEBHOOK_SUIVI}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtP)}&date=${encodeURIComponent(today)}`);
+      showToast('SMS envoyé à ' + name + ' · J+7 & J+365 programmés ✓', 'success');
+      saveHistory(name, phone);
+    } catch(e) {
+      showToast('Erreur réseau. Réessayez.', 'error');
+    }
+    if(btn) setLoad(btn, false, btnLabel);
+  }
+
+  // ── SAISIE MANUELLE ──────────────────────────────────────────
+  async function sendManuel(btn) {
+    const name = document.getElementById('m-name').value.trim();
+    const phone = document.getElementById('m-phone').value.trim();
+    if(!name||!phone){showToast('Remplissez tous les champs.','error');return;}
+    setLoad(btn,true,'Envoi...');
+    await triggerSmsFlow(name, phone, btn, 'Déclencher les envois');
+    document.getElementById('m-name').value='';
+    document.getElementById('m-phone').value='';
+  }
+
+  // ── HISTORIQUE ───────────────────────────────────────────────
+  function saveHistory(name, phone) {
+    const history = JSON.parse(localStorage.getItem('ho_history')||'[]');
+    history.unshift({ name, phone, date: new Date().toLocaleDateString('fr-FR'), time: new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}) });
+    if(history.length > 50) history.pop();
+    localStorage.setItem('ho_history', JSON.stringify(history));
+    renderHistory();
+  }
+
+  function renderHistory() {
+    const list = document.getElementById('history-list');
+    if(!list) return;
+    const history = JSON.parse(localStorage.getItem('ho_history')||'[]');
+    if(!history.length) {
+      list.innerHTML='<p style="font-size:13px;color:var(--muted);text-align:center;padding:24px;">Aucun envoi pour l\'instant.</p>';
+      return;
+    }
+    list.innerHTML = history.map(h => `
+      <div class="history-item">
+        <div class="history-avatar">${h.name.charAt(0).toUpperCase()}</div>
+        <div class="history-info">
+          <div class="history-name">${h.name}</div>
+          <div class="history-meta">${h.phone} · ${h.date} à ${h.time}</div>
+        </div>
+        <span class="history-badge badge-sent">Envoyé ✓</span>
+      </div>
+    `).join('');
+  }
+
+  // ── UTILS ─────────────────────────────────────────────────────
+  function fmtPhone(r){const d=r.replace(/[\s.\-]/g,'');if(d.startsWith('+33'))return d;if(d.startsWith('33'))return'+'+d;if(d.startsWith('0'))return'+33'+d.slice(1);return'+33'+d;}
+  function showToast(msg,type='success'){const t=document.getElementById('toast');document.getElementById('toast-msg').textContent=msg;document.getElementById('toast-icon').innerHTML=type==='success'?'<polyline points="20 6 9 17 4 12"/>':'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>';t.className='toast '+type;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),4000);}
   const SEND_SVG='<line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>';
-  function setLoad(btn,on,txt){if(on){btn.classList.add('loading');btn.querySelector('svg').innerHTML='<circle cx="12" cy="12" r="9" stroke-dasharray="28" stroke-dashoffset="8" class="spinner"/>';btn.querySelector('span').textContent='Envoi...';}else{btn.classList.remove('loading');btn.querySelector('svg').innerHTML=SEND_SVG;btn.querySelector('span').textContent=txt;}}
-
-  async function sendLunettes(btn){
-    const name=document.getElementById('l-name').value.trim(),phone=document.getElementById('l-phone').value.trim();
-    if(!name||!phone){showToast('Veuillez remplir tous les champs.','error');return;}
-    setLoad(btn,true);
-    try{await fetch(`${WEBHOOK_LUNETTES}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtPhone(phone))}`);showToast('SMS envoyé à '+name+' ✓');document.getElementById('l-name').value='';document.getElementById('l-phone').value='';}
-    catch(e){showToast('Erreur réseau, réessayez.','error');}
-    setLoad(btn,false,'Envoyer la notification');
-  }
-
-  async function sendSuivi(btn){
-    const name=document.getElementById('s-name').value.trim(),phone=document.getElementById('s-phone').value.trim(),date=document.getElementById('s-date').value;
-    if(!name||!phone||!date){showToast('Veuillez remplir tous les champs.','error');return;}
-    setLoad(btn,true);
-    try{await fetch(`${WEBHOOK_SUIVI}?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(fmtPhone(phone))}&date=${encodeURIComponent(date)}`);showToast('Suivi programmé pour '+name+' ✓');document.getElementById('s-name').value='';document.getElementById('s-phone').value='';document.getElementById('s-date').valueAsDate=new Date();}
-    catch(e){showToast('Erreur réseau, réessayez.','error');}
-    setLoad(btn,false,'Programmer le suivi');
-  }
+  function setLoad(btn,on,txt){if(!btn)return;if(on){btn.classList.add('loading');btn.querySelector('svg').innerHTML='<circle cx="12" cy="12" r="9" stroke-dasharray="28" stroke-dashoffset="8" class="spinner"/>';btn.querySelector('span').textContent=txt||'Envoi...';}else{btn.classList.remove('loading');btn.querySelector('svg').innerHTML=SEND_SVG;btn.querySelector('span').textContent=txt;}}
 </script>
 </body>
 </html>
