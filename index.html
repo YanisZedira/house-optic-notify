@@ -1124,6 +1124,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     var btn = this;
     setLoad(btn, true);
     var p = fmtPhone(ph);
+    if (!dlCurrentId) dlCurrentId = document.getElementById('dl-id-input').value.trim();
     try {
       await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(nm) + '&phone=' + encodeURIComponent(p) + '&id=' + encodeURIComponent(dlCurrentId || ''));
       showToast('Client enregistre · SMS envoye a ' + nm, 'ok');
