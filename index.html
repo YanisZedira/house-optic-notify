@@ -208,6 +208,64 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .main{margin-left:0;padding:16px;}
   .vf-btns{flex-direction:column;}
 }
+
+/* ══ PISTOLET DATALOGIC ══ */
+.dl-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:100px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;user-select:none;transition:all .4s cubic-bezier(.25,.46,.45,.94);}
+.dl-pill.s-ready{background:rgba(201,168,76,.08);color:var(--gold);border:1px solid rgba(201,168,76,.2);box-shadow:0 2px 12px rgba(201,168,76,.06);}
+.dl-pill.s-loading{background:rgba(201,168,76,.06);color:var(--gold);border:1px solid rgba(201,168,76,.15);}
+.dl-pill.s-found{background:rgba(26,107,60,.06);color:var(--green);border:1px solid rgba(26,107,60,.18);box-shadow:0 2px 12px rgba(26,107,60,.06);}
+.dl-pill.s-new{background:rgba(192,57,43,.05);color:#c0392b;border:1px solid rgba(192,57,43,.15);}
+.dl-pill-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;transition:background .3s;}
+.dl-pill.s-ready   .dl-pill-dot{background:var(--gold);animation:dlPulse 2s ease-in-out infinite;}
+.dl-pill.s-loading .dl-pill-dot{background:var(--gold);animation:dlPulseLoad 1s ease-in-out infinite;}
+.dl-pill.s-found   .dl-pill-dot{background:var(--green);animation:none;}
+.dl-pill.s-new     .dl-pill-dot{background:#c0392b;animation:none;}
+@keyframes dlPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+@keyframes dlPulseLoad{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.3)}}
+.dl-header-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.dl-btn-reset{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:rgba(13,13,13,.04);border:1px solid rgba(13,13,13,.08);cursor:pointer;opacity:0;pointer-events:none;transform:translateX(-4px);transition:all .3s cubic-bezier(.25,.46,.45,.94);}
+.dl-btn-reset.visible{opacity:1;pointer-events:auto;transform:translateX(0);}
+.dl-btn-reset:hover{background:rgba(13,13,13,.08);color:var(--ink);border-color:rgba(13,13,13,.15);}
+.dl-btn-reset svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.dl-main-card{position:relative;max-width:560px;overflow:hidden;}
+.dl-scan-indicator{position:absolute;top:0;left:0;right:0;height:2px;overflow:hidden;opacity:0;transition:opacity .3s;z-index:2;}
+.dl-scan-indicator.active{opacity:1;}
+.dl-scan-indicator::after{content:'';position:absolute;top:0;left:-40%;width:40%;height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:dlScanBar 1.5s ease-in-out infinite;}
+@keyframes dlScanBar{0%{left:-40%}100%{left:100%}}
+.iw input.c-ok{border-color:var(--green)!important;background:rgba(26,107,60,.03)!important;box-shadow:0 0 0 3px rgba(26,107,60,.08)!important;}
+.iw input.c-err{border-color:#c0392b!important;background:rgba(192,57,43,.03)!important;box-shadow:0 0 0 3px rgba(192,57,43,.08)!important;}
+.dl-result{border-radius:var(--radius-sm);padding:22px 24px;margin-top:20px;display:none;}
+.dl-result.show{display:block;animation:dlSlideUp .4s cubic-bezier(.16,1,.3,1) both;}
+@keyframes dlSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.dl-result.r-found{background:rgba(26,107,60,.035);border:1.5px solid rgba(26,107,60,.12);}
+.dl-result.r-new{background:rgba(201,168,76,.04);border:1.5px solid rgba(201,168,76,.18);}
+.dl-result-lbl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.dl-result-lbl::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.r-found .dl-result-lbl{color:var(--green);}
+.r-found .dl-result-lbl::before{background:var(--green);}
+.r-new .dl-result-lbl{color:var(--gold);}
+.r-new .dl-result-lbl::before{background:var(--gold);}
+.dl-client-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.3;}
+.dl-client-phone{font-size:13px;color:var(--muted);letter-spacing:.03em;margin-bottom:4px;}
+.dl-steps-wrap{margin-top:16px;display:flex;flex-direction:column;}
+.dl-step-row{display:flex;align-items:flex-start;gap:14px;font-size:13px;color:var(--muted);line-height:1.7;padding:12px 0;border-bottom:1px solid rgba(13,13,13,.04);}
+.dl-step-row:first-child{padding-top:0;}
+.dl-step-row:last-child{border-bottom:none;padding-bottom:4px;}
+.dl-step-num{width:24px;height:24px;min-width:24px;border-radius:50%;background:var(--ink);color:var(--paper);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.dl-step-row strong{color:var(--ink);font-weight:600;}
+@media(max-width:640px){
+  .dl-pill{font-size:10.5px;padding:8px 14px;gap:8px;}
+  .dl-main-card{max-width:100%;}
+  .dl-result{padding:18px;}
+  .dl-client-name{font-size:19px;}
+  .dl-step-row{font-size:12.5px;gap:10px;padding:10px 0;}
+  .dl-step-num{width:22px;height:22px;min-width:22px;font-size:10px;}
+}
+@media(max-width:420px){
+  .dl-header-actions{flex-direction:column;align-items:flex-start;gap:8px;}
+  .dl-result{padding:14px 16px;}
+  .dl-client-name{font-size:17px;}
+}
 </style>
 </head>
 <body>
@@ -260,6 +318,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="nav-btn" id="nav-manuel">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <span>Saisie manuelle</span>
+      </button>
+      <button class="nav-btn" id="nav-datalogic">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="7" x2="7" y2="17"/><line x1="11" y1="7" x2="11" y2="17"/><line x1="15" y1="7" x2="15" y2="13"/><line x1="19" y1="7" x2="19" y2="17"/></svg>
+        <span>Pistolet Datalogic</span>
       </button>
     </div>
     <div class="sb-footer">
@@ -414,6 +476,108 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
     </div>
 
+
+    <!-- PAGE DATALOGIC -->
+    <div class="page" id="page-datalogic">
+
+      <div>
+        <div class="page-title">Pistolet Datalogic</div>
+        <div class="page-sub">Scannez le code-barres de la fiche — tout le reste est automatique</div>
+      </div>
+
+      <div class="dl-header-actions">
+        <div id="dl-status" class="dl-pill s-ready">
+          <div class="dl-pill-dot"></div>
+          <span id="dl-status-txt">En attente &#8212; pointez le pistolet vers le code&#8209;barres</span>
+        </div>
+        <button class="dl-btn-reset" id="dl-btn-reset" title="R&#233;initialiser">
+          <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span>R&#233;initialiser</span>
+        </button>
+      </div>
+
+      <!-- Card principale -->
+      <div class="card dl-main-card" id="dl-main-card">
+        <div class="dl-scan-indicator" id="dl-scan-indicator"></div>
+        <div class="card-title">Code-barres detect&#233;</div>
+        <p class="card-desc">Pointez le pistolet vers la fiche client et appuyez sur la gachette. L'identifiant s'affiche automatiquement.</p>
+
+        <!-- Champ ID (readonly, rempli par le scanner) -->
+        <div class="field" style="margin-bottom:0;">
+          <label>Identifiant client</label>
+          <div class="iw">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="7" y1="7" x2="7" y2="17"/><line x1="11" y1="7" x2="11" y2="17"/><line x1="15" y1="7" x2="15" y2="13"/><line x1="19" y1="7" x2="19" y2="17"/></svg>
+            <input id="dl-id-input" type="text"
+              placeholder="Ex. 202886 — affiche automatiquement apres le scan..."
+              autocomplete="off" autocorrect="off" spellcheck="false" readonly
+              style="letter-spacing:.06em;font-weight:500;">
+          </div>
+        </div>
+
+        <!-- Client trouve -->
+        <div class="dl-result r-found" id="dl-box-found">
+          <div class="dl-result-lbl">Client identifie dans la base</div>
+          <div class="dl-client-name" id="dl-res-name">—</div>
+          <div class="dl-client-phone" id="dl-res-phone">—</div>
+          <button class="btn btn-green mt" id="dl-btn-send">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span>Envoyer SMS Lunettes pretes</span>
+          </button>
+        </div>
+
+        <!-- Nouveau client -->
+        <div class="dl-result r-new" id="dl-box-new">
+          <div class="dl-result-lbl">Nouveau client · ID <span id="dl-new-id-lbl">—</span></div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:16px;">Premiere visite. Entrez le nom et le telephone une seule fois — tout sera memorise pour les prochaines visites.</p>
+          <div class="fields">
+            <div class="field">
+              <label>Prenom et nom</label>
+              <div class="iw">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" id="dl-new-name" placeholder="ex. Sophie Martin">
+              </div>
+            </div>
+            <div class="field">
+              <label>Telephone</label>
+              <div class="iw">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.3 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.06 6.06l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" id="dl-new-phone" placeholder="06 12 34 56 78">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-gold mt" id="dl-btn-new-send">
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <span>Enregistrer et envoyer SMS</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tuto -->
+      <div class="card" style="max-width:560px;">
+        <div class="card-title">Comment utiliser le pistolet</div>
+        <div style="margin-top:16px;">
+          <div class="dl-step-row">
+            <div class="dl-step-num">1</div>
+            <div><strong>Branchez le pistolet Datalogic</strong> en USB sur l'ordinateur. Aucun driver a installer — il se connecte automatiquement.</div>
+          </div>
+          <div class="dl-step-row">
+            <div class="dl-step-num">2</div>
+            <div><strong>Cliquez sur cette page</strong> pour l'activer. La pastille doree indique que le scanner est pret.</div>
+          </div>
+          <div class="dl-step-row">
+            <div class="dl-step-num">3</div>
+            <div><strong>Pointez le pistolet</strong> vers le code-barres en haut de la fiche client et appuyez sur la gachette.</div>
+          </div>
+          <div class="dl-step-row">
+            <div class="dl-step-num">4</div>
+            <div><strong>Client connu :</strong> son nom s'affiche, cliquez Envoyer SMS. <strong>Nouveau client :</strong> entrez nom et telephone une seule fois — memorise pour les prochaines visites.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
 </div>
 
@@ -535,6 +699,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   document.getElementById('nav-scanner').addEventListener('click', function() { showPage('page-scanner','nav-scanner'); });
   document.getElementById('nav-attente').addEventListener('click', function() { showPage('page-attente','nav-attente'); loadAttente(); });
   document.getElementById('nav-manuel').addEventListener('click', function() { showPage('page-manuel','nav-manuel'); });
+  document.getElementById('nav-datalogic').addEventListener('click', function() {
+    showPage('page-datalogic','nav-datalogic');
+    dlOnPageOpen();
+  });
   document.getElementById('btn-refresh-attente').addEventListener('click', loadAttente);
 
   // ── SCANNER AUTO ────────────────────────────────────────────────
@@ -810,6 +978,170 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     if (count > 0) { badge.textContent = count; badge.style.display = 'inline-block'; }
     else { badge.style.display = 'none'; }
   }
+
+
+  // ══════════════════════════════════════════════════════
+  // ── PISTOLET DATALOGIC ────────────────────────────────
+  // ══════════════════════════════════════════════════════
+  var dlPageActive = false;
+  var dlBuf        = '';
+  var dlBufTimer   = null;
+  var dlCurrentId  = null;
+
+  function dlOnPageOpen() {
+    dlPageActive = true;
+    dlReset();
+    document.getElementById('dl-id-input').focus();
+  }
+
+  // Désactiver quand on quitte — branché sur chaque bouton nav sauf Datalogic
+  document.getElementById('nav-scanner').addEventListener('click',  function() { dlPageActive = false; });
+  document.getElementById('nav-attente').addEventListener('click',  function() { dlPageActive = false; });
+  document.getElementById('nav-manuel').addEventListener('click',   function() { dlPageActive = false; });
+
+  // Listener clavier global — n'agit QUE si la page Datalogic est active
+  document.addEventListener('keydown', function(e) {
+    // Bloquer si PIN screen visible
+    var pin = document.getElementById('pin-screen');
+    if (!pin || pin.style.display !== 'none') return;
+    // Bloquer si page Datalogic non active
+    if (!dlPageActive) return;
+    // Bloquer si focus sur champs saisie
+    var act = document.activeElement;
+    if (act && (act.id === 'dl-new-name' || act.id === 'dl-new-phone')) return;
+
+    if (e.key === 'Enter') {
+      if (dlBuf.length >= 3) {
+        clearTimeout(dlBufTimer);
+        var id = dlBuf.trim();
+        dlBuf = '';
+        dlProcessId(id);
+      }
+      return;
+    }
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      dlBuf += e.key;
+      clearTimeout(dlBufTimer);
+      dlBufTimer = setTimeout(function() { dlBuf = ''; }, 200);
+    }
+  });
+
+  // Enter direct dans l'input (copier-coller)
+  document.getElementById('dl-id-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim().length >= 3) {
+      dlProcessId(this.value.trim());
+    }
+  });
+
+  // Focus sur la page au clic
+  document.getElementById('page-datalogic').addEventListener('click', function(e) {
+    if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+      document.getElementById('dl-id-input').focus();
+    }
+  });
+
+  async function dlProcessId(id) {
+    dlCurrentId = id;
+    var inp = document.getElementById('dl-id-input');
+    inp.value = id;
+    inp.className = '';
+    document.getElementById('dl-box-found').classList.remove('show');
+    document.getElementById('dl-box-new').classList.remove('show');
+    dlSetStatus('s-ready', 'Recherche dans la base...');
+
+    try {
+      var resp = await fetch(WH_ATTENTE);
+      var data = await resp.json();
+      var rows = Array.isArray(data) ? data : (data.items || []);
+      var found = rows.find(function(r) {
+        return String(r['ID CLIENT'] || r.id_client || '').trim() === String(id).trim();
+      });
+      if (found) {
+        inp.classList.add('c-ok');
+        var nm = found['NOM CLIENT'] || found.nom || '';
+        var ph = found['TELEPHONE']  || found.telephone || '';
+        dlSetStatus('s-found', 'Client identifie : ' + nm);
+        document.getElementById('dl-res-name').textContent  = nm;
+        document.getElementById('dl-res-phone').textContent = fmtPhoneDisplay(ph);
+        document.getElementById('dl-box-found').classList.add('show');
+      } else {
+        inp.classList.add('c-err');
+        dlSetStatus('s-new', 'ID ' + id + ' inconnu — nouveau client');
+        document.getElementById('dl-new-id-lbl').textContent = id;
+        document.getElementById('dl-box-new').classList.add('show');
+        setTimeout(function() { document.getElementById('dl-new-name').focus(); }, 150);
+      }
+    } catch(err) {
+      inp.classList.add('c-err');
+      dlSetStatus('s-new', 'Erreur reseau — entrez les infos manuellement');
+      document.getElementById('dl-new-id-lbl').textContent = id;
+      document.getElementById('dl-box-new').classList.add('show');
+    }
+    setTimeout(function() { inp.classList.remove('c-ok','c-err'); }, 2500);
+  }
+
+  function dlSetStatus(cls, msg) {
+    var bar = document.getElementById('dl-status');
+    bar.className = 'dl-status ' + cls;
+    document.getElementById('dl-status-txt').textContent = msg;
+  }
+
+  function dlReset() {
+    dlCurrentId = null;
+    dlBuf = '';
+    clearTimeout(dlBufTimer);
+    var inp = document.getElementById('dl-id-input');
+    if (inp) { inp.value = ''; inp.className = ''; }
+    var bf = document.getElementById('dl-box-found');
+    var bn = document.getElementById('dl-box-new');
+    if (bf) bf.classList.remove('show');
+    if (bn) bn.classList.remove('show');
+    var nn = document.getElementById('dl-new-name');
+    var np = document.getElementById('dl-new-phone');
+    if (nn) nn.value = '';
+    if (np) np.value = '';
+    dlSetStatus('s-ready', 'En attente — pointez le pistolet vers le code-barres');
+  }
+
+  // Bouton client connu
+  document.getElementById('dl-btn-send').addEventListener('click', async function() {
+    var nm = document.getElementById('dl-res-name').textContent;
+    var ph = document.getElementById('dl-res-phone').textContent;
+    if (!nm || nm === '-') return;
+    var btn = this;
+    setLoad(btn, true);
+    await triggerFlow(nm, ph);
+    setLoad(btn, false, 'Envoyer SMS — Lunettes pretes');
+    dlReset();
+  });
+
+  // Bouton nouveau client
+  document.getElementById('dl-btn-new-send').addEventListener('click', async function() {
+    var nm = document.getElementById('dl-new-name').value.trim();
+    var ph = document.getElementById('dl-new-phone').value.trim();
+    if (!nm)  { showToast('Entrez le nom du client.', 'err'); return; }
+    if (!ph)  { showToast('Entrez le numero de telephone.', 'err'); return; }
+    var btn = this;
+    setLoad(btn, true);
+    var p = fmtPhone(ph);
+    try {
+      await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(nm) + '&phone=' + encodeURIComponent(p) + '&id=' + encodeURIComponent(dlCurrentId || ''));
+      showToast('Client enregistre · SMS envoye a ' + nm, 'ok');
+      updateAttenteCount();
+    } catch(e) {
+      showToast('Erreur reseau. Reessayez.', 'err');
+    }
+    setLoad(btn, false, 'Enregistrer et envoyer SMS');
+    dlReset();
+  });
+
+  // Format tel
+  document.getElementById('dl-new-phone').addEventListener('input', function() {
+    var d = this.value.replace(/\D/g, '');
+    if (d.length > 0) this.value = fmtPhoneDisplay(d);
+  });
+
+  // ── FIN DATALOGIC ─────────────────────────────────────
 
 })();
 </script>
