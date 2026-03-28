@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>House Optic — Espace Équipe</title>
-<script src="https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.1/umd/index.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -415,10 +414,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
               <div><div class="res-title">Fiche lue avec succès</div><div class="res-sub">Vérifiez et corrigez si besoin avant d'envoyer</div></div>
             </div>
             <div id="res-barcode-info" style="display:none;font-size:11px;color:var(--green);background:rgba(26,107,60,.06);border:1px solid rgba(26,107,60,.15);border-radius:8px;padding:7px 12px;margin-bottom:4px;">
-              ✓ Code-barres détecté · ID <span id="res-barcode-val">—</span>
+              ✓ N° équipement détecté : <span id="res-barcode-val">—</span>
             </div>
             <div class="edit-field"><label>Nom du client</label><input type="text" class="edit-input" id="edit-name" placeholder="Prénom Nom"></div>
             <div class="edit-field"><label>Téléphone</label><input type="tel" class="edit-input" id="edit-phone" placeholder="06 12 34 56 78"></div>
+            <div class="edit-field"><label>N° équipement</label><input type="text" class="edit-input" id="edit-equip" placeholder="Ex. 202886 — optionnel"></div>
           </div>
           <div id="res-err" class="res-err" style="display:none;">⚠️ Lecture impossible. Vérifiez l'éclairage, rapprochez la caméra, ou modifiez les champs ci-dessus manuellement.</div>
           <div class="res-btns" style="margin-top:14px;">
@@ -603,8 +603,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   var pinInput = '';
   var camStream = null;
   var autoTimer    = null;
-  var ocrBarcodeId = null;   // ID code-barres capturé par ZXing pendant le scan caméra
-  var zxingReader  = null;   // instance ZXing
+  var ocrEquipId  = null;   // N° équipement capturé par OCR
 
   // ── UTILS ──────────────────────────────────────────────────────
   function fmtPhone(r) {
@@ -735,9 +734,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       document.getElementById('scan-home').style.display = 'none';
       document.getElementById('scan-result').style.display = 'none';
       document.getElementById('vf-wrap').style.display = 'flex';
-      ocrBarcodeId = null;
-      // Démarrer ZXing pour lire le code-barres en parallèle
-      startZXing();
+      ocrEquipId = null;
       // Auto-scan OCR toutes les 3 secondes
       autoTimer = setInterval(function() { captureAndOCR(true); }, 3000);
     } catch(e) {
@@ -778,6 +775,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       if (telM) tel = telM[1].replace(/[\s.]/g,'');
       var nomM = text.match(/(?:M\.|Mme\.?)\s+([A-Z][A-Za-z\u00C0-\u017E\s\-]{2,30})/);
       if (nomM) nom = nomM[1].trim();
+      // Extraction N° équipement — ex: "Equipement n° 202886"
+      var equipM = text.match(/[Ee]quipement\s+n[°o\u00B0]?[:\s]*([0-9]{4,8})/);
+      if (equipM) ocrEquipId = equipM[1];
       if (!nom) {
         var lines = text.split(/\r?\n/).map(function(l){return l.trim();}).filter(function(l){return l.length>3;});
         for (var i=0;i<lines.length;i++) {
@@ -816,15 +816,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   function showResult(nom, tel, success) {
     document.getElementById('vf-wrap').style.display = 'none';
     if (success && (nom || tel)) {
-      document.getElementById('edit-name').value = nom || '';
+      document.getElementById('edit-name').value  = nom || '';
       document.getElementById('edit-phone').value = tel ? fmtPhoneDisplay(tel) : '';
+      document.getElementById('edit-equip').value = ocrEquipId || '';
       document.getElementById('res-ok').style.display = 'flex';
       document.getElementById('res-err').style.display = 'none';
-      // Afficher l'ID code-barres si ZXing l'a capturé
+      // Indicateur N° équipement
       var barcodeInfo = document.getElementById('res-barcode-info');
       var barcodeVal  = document.getElementById('res-barcode-val');
-      if (ocrBarcodeId && barcodeInfo && barcodeVal) {
-        barcodeVal.textContent = ocrBarcodeId;
+      if (ocrEquipId && barcodeInfo && barcodeVal) {
+        barcodeVal.textContent = ocrEquipId;
         barcodeInfo.style.display = 'block';
       } else if (barcodeInfo) {
         barcodeInfo.style.display = 'none';
@@ -838,32 +839,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     document.getElementById('scan-result').style.display = 'block';
   }
 
-function startZXing() {
-  if (typeof ZXingBrowser === 'undefined') {
-    console.log('ZXing non charge');
-    return;
-  }
-  try {
-    zxingReader = new ZXingBrowser.BrowserMultiFormatReader();
-    var video = document.getElementById('cam-video');
-    zxingReader.decodeFromVideoElement(video, function(result, err) {
-      if (result) {
-        var code = result.getText().trim();
-        if (code && code.length >= 3) {
-          ocrBarcodeId = code;
-          var hint = document.getElementById('vf-hint');
-          if (hint) hint.textContent = '✓ Code-barres : ' + code + ' · Scan OCR en cours...';
-        }
-      }
-    });
-    console.log('ZXing demarre');
-  } catch(e) {
-    console.log('ZXing erreur:', e);
-  }
-}
-
   function stopCamera() {
-    if (zxingReader) { try { zxingReader.reset(); } catch(e){} zxingReader=null; }
     if (camStream)   { camStream.getTracks().forEach(function(t){t.stop();}); camStream=null; }
     if (autoTimer)   { clearInterval(autoTimer); autoTimer=null; }
   }
@@ -884,7 +860,7 @@ function startZXing() {
 
   function rescan() {
     resetVF();
-    ocrBarcodeId = null;
+    ocrEquipId = null;
     document.getElementById('scan-result').style.display = 'none';
     document.getElementById('scan-home').style.display = 'block';
   }
@@ -892,8 +868,10 @@ function startZXing() {
   async function confirmSend() {
     var name  = document.getElementById('edit-name').value.trim();
     var phone = document.getElementById('edit-phone').value.trim();
+    var equip = document.getElementById('edit-equip').value.trim();
     if (!name) { showToast('Entrez le nom du client.', 'err'); return; }
     if (!phone) { showToast('Entrez le numéro de téléphone.', 'err'); return; }
+    if (equip) ocrEquipId = equip;  // utiliser valeur corrigée par le staff
     var btn = document.getElementById('btn-confirm');
     setLoad(btn, true);
     await triggerFlow(name, phone);
@@ -904,9 +882,9 @@ function startZXing() {
   // ── FLUX SMS + GOOGLE SHEETS ───────────────────────────────────
   async function triggerFlow(name, phone, clientId) {
     var p   = fmtPhone(phone);
-    var id  = clientId || ocrBarcodeId || '';
+    var id  = clientId || ocrEquipId || '';
     try {
-      await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p) + '&id=' + encodeURIComponent(id));
+      await fetch(WH_LUNETTES + '?name=' + encodeURIComponent(name) + '&phone=' + encodeURIComponent(p) + '&id=' + encodeURIComponent(id) + '&equip=' + encodeURIComponent(ocrEquipId || ''));
       showToast('SMS envoyé à ' + name + ' · Suivi programmé ✓', 'ok');
       updateAttenteCount();
     } catch(e) {
