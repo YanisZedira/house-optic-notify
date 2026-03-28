@@ -838,31 +838,29 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     document.getElementById('scan-result').style.display = 'block';
   }
 
-  function startZXing() {
-    // ZXing lit le code-barres Code128 en temps réel sur le flux caméra
-    if (typeof ZXingBrowser === 'undefined') return;
-    try {
-      var hints = new Map();
-      hints.set(ZXingBrowser.DecodeHintType && ZXingBrowser.DecodeHintType.POSSIBLE_FORMATS
-        ? ZXingBrowser.DecodeHintType.POSSIBLE_FORMATS : 2,
-        ['CODE_128','CODE_39','EAN_13']);
-      zxingReader = new ZXingBrowser.BrowserMultiFormatReader(hints);
-      var video = document.getElementById('cam-video');
-      zxingReader.decodeFromVideoElement(video, function(result, err) {
-        if (result && result.getText) {
-          var code = result.getText().trim();
-          if (code && code.length >= 3) {
-            ocrBarcodeId = code;
-            // Indicateur visuel discret dans le viewfinder
-            var hint = document.getElementById('vf-hint');
-            if (hint) hint.textContent = '✓ Code-barres lu : ' + code + ' · Scan OCR en cours...';
-          }
-        }
-      });
-    } catch(e) {
-      // ZXing non disponible ou erreur — OCR seul, pas bloquant
-    }
+function startZXing() {
+  if (typeof ZXingBrowser === 'undefined') {
+    console.log('ZXing non charge');
+    return;
   }
+  try {
+    zxingReader = new ZXingBrowser.BrowserMultiFormatReader();
+    var video = document.getElementById('cam-video');
+    zxingReader.decodeFromVideoElement(video, function(result, err) {
+      if (result) {
+        var code = result.getText().trim();
+        if (code && code.length >= 3) {
+          ocrBarcodeId = code;
+          var hint = document.getElementById('vf-hint');
+          if (hint) hint.textContent = '✓ Code-barres : ' + code + ' · Scan OCR en cours...';
+        }
+      }
+    });
+    console.log('ZXing demarre');
+  } catch(e) {
+    console.log('ZXing erreur:', e);
+  }
+}
 
   function stopCamera() {
     if (zxingReader) { try { zxingReader.reset(); } catch(e){} zxingReader=null; }
